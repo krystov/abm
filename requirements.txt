@@ -1,0 +1,5 @@
+mesa
+numpy
+pandas
+openai
+pydantic

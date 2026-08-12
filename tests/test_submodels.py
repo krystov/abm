@@ -1,0 +1,157 @@
+"""Tests for submodels: TPB, experience curve, labour market."""
+
+import math
+
+from submodels.tpb import compute_npv, compute_tpb_intention
+from submodels.experience_curve import (
+    compute_non_module_cost,
+    compute_production_cost,
+    update_knowledge_stock,
+)
+from submodels.labor_market import adjust_workforce, compute_bos_cost
+
+
+class TestNPV:
+    def test_negative_npv_with_zero_fit(self):
+        """Without FiT, NPV should be negative for typical system."""
+        npv = compute_npv(
+            system_size_kw=5.0,
+            module_price_per_w=1.50,
+            bos_cost_per_w=1.00,
+            electricity_price=0.25,
+            fit_tariff=0.0,
+            self_consumption_rate=0.30,
+            discount_rate=0.04,
+        )
+        assert npv < 0, f"Expected negative NPV without FiT, got {npv}"
+
+    def test_positive_npv_with_high_fit(self):
+        """High FiT should make NPV positive."""
+        npv = compute_npv(
+            system_size_kw=5.0,
+            module_price_per_w=0.50,  # cheap modules
+            bos_cost_per_w=0.50,
+            electricity_price=0.30,
+            fit_tariff=0.50,  # high FiT
+            self_consumption_rate=0.30,
+            discount_rate=0.04,
+        )
+        assert npv > 0, f"Expected positive NPV with high FiT, got {npv}"
+
+
+class TestTPBIntention:
+    def test_high_env_awareness_shortcut(self):
+        """Env awareness above threshold should give intention >= attitude weight."""
+        intention = compute_tpb_intention(
+            environmental_awareness=0.90,
+            npv=-5000,
+            neighbour_adoption_ratio=0.0,
+            market_maturity=0.0,
+        )
+        assert intention > 0.5, f"High env awareness should drive high intention, got {intention}"
+
+    def test_low_intention_no_signals(self):
+        """No neighbours, no market, bad NPV → low intention."""
+        intention = compute_tpb_intention(
+            environmental_awareness=0.3,
+            npv=-10000,
+            neighbour_adoption_ratio=0.0,
+            market_maturity=0.0,
+        )
+        assert intention < 0.5
+
+
+class TestExperienceCurve:
+    def test_cost_decreases_with_more_production(self):
+        """More cumulative production → lower cost."""
+        low_cp = compute_production_cost(
+            cumulative_production=100.0,
+            knowledge_stock=100.0,
+            cp_initial=100.0,
+            ks_initial=100.0,
+            intercept=1.50,
+            learning_by_doing_rate=0.20,
+            learning_by_research_rate=0.10,
+        )
+        high_cp = compute_production_cost(
+            cumulative_production=10000.0,
+            knowledge_stock=100.0,
+            cp_initial=100.0,
+            ks_initial=100.0,
+            intercept=1.50,
+            learning_by_doing_rate=0.20,
+            learning_by_research_rate=0.10,
+        )
+        assert high_cp < low_cp, "Cost should decrease with cumulative production"
+
+    def test_cost_decreases_with_more_knowledge(self):
+        """More knowledge stock → lower cost."""
+        low_ks = compute_production_cost(
+            cumulative_production=1000.0,
+            knowledge_stock=100.0,
+            cp_initial=100.0,
+            ks_initial=100.0,
+            intercept=1.50,
+            learning_by_doing_rate=0.20,
+            learning_by_research_rate=0.10,
+        )
+        high_ks = compute_production_cost(
+            cumulative_production=1000.0,
+            knowledge_stock=10000.0,
+            cp_initial=100.0,
+            ks_initial=100.0,
+            intercept=1.50,
+            learning_by_doing_rate=0.20,
+            learning_by_research_rate=0.10,
+        )
+        assert high_ks < low_ks, "Cost should decrease with knowledge stock"
+
+    def test_update_knowledge_stock(self):
+        """Knowledge stock should accumulate with R&D and depreciate."""
+        ks = update_knowledge_stock(100.0, 10.0, depreciation=0.01)
+        expected = 0.99 * 100.0 + 10.0  # 109.0
+        assert math.isclose(ks, expected, rel_tol=1e-6)
+
+    def test_non_module_cost(self):
+        """BOS cost should decrease with cumulative installations."""
+        low = compute_non_module_cost(100.0, ci_initial=100.0)
+        high = compute_non_module_cost(10000.0, ci_initial=100.0)
+        assert high < low
+
+
+class TestLaborMarket:
+    def test_hire_when_backlog_high(self):
+        """High backlog should trigger hiring."""
+        new_emp = adjust_workforce(
+            employees=1000,
+            order_backlog=100.0,
+            monthly_capacity=10.0,  # 10 months to clear → above threshold
+            min_employees=100,
+        )
+        assert new_emp > 1000
+
+    def test_fire_when_backlog_low(self):
+        """Low backlog should trigger firing."""
+        new_emp = adjust_workforce(
+            employees=1000,
+            order_backlog=1.0,
+            monthly_capacity=10.0,  # 0.1 months to clear → below threshold
+            min_employees=100,
+        )
+        assert new_emp < 1000
+
+    def test_respect_min_employees(self):
+        """Should not go below min_employees."""
+        new_emp = adjust_workforce(
+            employees=50,
+            order_backlog=0.0,
+            monthly_capacity=10.0,
+            min_employees=100,
+        )
+        assert new_emp == 100
+
+    def test_bos_cost_rises_with_utilisation(self):
+        """Higher backlog per employee → higher BOS cost."""
+        low = compute_bos_cost(1.0, order_backlog=10, employees=100)
+        high = compute_bos_cost(1.0, order_backlog=100, employees=10)
+        assert high > low
