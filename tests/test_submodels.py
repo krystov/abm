@@ -41,14 +41,23 @@ class TestNPV:
 
 class TestTPBIntention:
     def test_high_env_awareness_shortcut(self):
-        """Env awareness above threshold should give intention >= attitude weight."""
-        intention = compute_tpb_intention(
+        """High env awareness gives graduated boost above base attitude."""
+        intention_high = compute_tpb_intention(
             environmental_awareness=0.90,
             npv=-5000,
             neighbour_adoption_ratio=0.0,
             market_maturity=0.0,
         )
-        assert intention > 0.5, f"High env awareness should drive high intention, got {intention}"
+        intention_mid = compute_tpb_intention(
+            environmental_awareness=0.50,
+            npv=-5000,
+            neighbour_adoption_ratio=0.0,
+            market_maturity=0.0,
+        )
+        assert intention_high > intention_mid, (
+            f"Higher env awareness should boost intention: "
+            f"high={intention_high:.4f} vs mid={intention_mid:.4f}"
+        )
 
     def test_low_intention_no_signals(self):
         """No neighbours, no market, bad NPV → low intention."""

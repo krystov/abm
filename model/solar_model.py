@@ -340,7 +340,7 @@ class SolarModel:
             adopter.pbc = market_maturity
             adopter.intention = intention
 
-            # Use agent's personal threshold (heterogeneity from init)
+            # Deterministic threshold adoption (heterogeneous per agent)
             if intention > adopter.personal_threshold:
                 adopter.is_adopted = True
                 new_demand_mw += adopter.system_size / 1000

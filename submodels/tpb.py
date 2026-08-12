@@ -68,16 +68,21 @@ def compute_tpb_intention(
     §3.1:
       I = w_att * A + w_sn * SN + w_pbc * PBC
 
-    Attitude A is a weighted combination of environmental awareness and
-    economic utility (normalised NPV).  Very high environmental awareness
-    (> env_threshold) short-circuits to A = 1.0.
+    Attitude A combines environmental awareness and economic utility.
+    High environmental awareness provides a graduated boost rather than a
+    binary shortcut — agents need both environmental concern AND viable
+    economics to adopt.
     """
+    x = max(-700, min(700, -gamma * npv / 10_000))
+    eco_norm = 1.0 / (1.0 + math.exp(x))
+    eco = max(0.0, min(1.0, eco_norm))
+
     if environmental_awareness > env_threshold:
-        attitude = 1.0
+        # Graduated boost: scales from base attitude at threshold to 1.0 at env=1.0
+        excess = (environmental_awareness - env_threshold) / (1.0 - env_threshold)
+        base_attitude = w_env * env_threshold + w_eco * eco
+        attitude = base_attitude + excess * (1.0 - base_attitude)
     else:
-        x = max(-700, min(700, -gamma * npv / 10_000))
-        eco_norm = 1.0 / (1.0 + math.exp(x))
-        eco = max(0.0, min(1.0, eco_norm))
         attitude = w_env * environmental_awareness + w_eco * eco
 
     sn = neighbour_adoption_ratio
