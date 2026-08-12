@@ -475,6 +475,16 @@ class SolarModel:
                 mfg.apply_llm_decision(decision, global_cumulative_mw=global_cumulative_mw)
             result[key] = decision
 
+        # Knowledge spillover: less advanced learns from leader (gap-proportional)
+        dom = self.manufacturers["domestic"]
+        for_ = self.manufacturers["foreign"]
+        ks_gap_dom = for_.knowledge_stock - dom.knowledge_stock
+        ks_gap_for = dom.knowledge_stock - for_.knowledge_stock
+        if ks_gap_dom > 0:
+            dom.knowledge_stock += dom.knowledge_spillover_in_ratio * ks_gap_dom / 12
+        if ks_gap_for > 0:
+            for_.knowledge_stock += for_.knowledge_spillover_in_ratio * ks_gap_for / 12
+
         return result
 
     # ------------------------------------------------------------------
