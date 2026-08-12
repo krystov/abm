@@ -118,7 +118,11 @@ class SolarModel:
 
             # Personal adoption threshold: innovator→laggard spectrum
             # N(0.50, 0.08) clipped → ~2% below 0.32, ~2% above 0.68
+            # Positively correlated with discount rate: cautious = high threshold + high discount
             personal_threshold = max(0.28, min(0.72, self.rng.gauss(0.50, 0.08)))
+            # Personal discount rate: wider spread for income/patience heterogeneity
+            # Correlated with threshold: laggards discount future more heavily
+            personal_dr = 0.01 * (personal_threshold - 0.50) + self.rng.gauss(0, 0.02)
 
             adopter = Adopter(
                 agent_id=i,
@@ -130,7 +134,7 @@ class SolarModel:
                 ),
                 electricity_price=elec_price,
                 discount_rate=disc_rate,
-                personal_discount_rate=round(self.rng.gauss(0, 0.01), 4),
+                personal_discount_rate=round(personal_dr, 4),
                 discount_foreign_pv=round(self.rng.uniform(0.01, 0.03), 4),
                 pv_orientation=round(max(0.1, self.rng.gauss(0.9, 0.2)), 2),
                 environmental_awareness=round(
