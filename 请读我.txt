@@ -1,0 +1,82 @@
+请按以下要求推进任务：你有自行编辑的权利，不需要询问我。在适当的时候更新"测试记录.txt"。当我给出"我要中断任务了"之类的指令时于适合的节点停止任务并在"请读我"里留下说明方便下次开始任务，我没给出停止的指令就不要中断任务直至任务结束。
+
+API_Key(deepseek):见本地 .env（.gitignore 已排除 .env；为安全起见不再记进仓库文件）
+======================================================================
+ 项目目标（复述）
+======================================================================
+
+复现论文《Beyond innovation and deployment: Modeling the impact of technology-push
+and demand-pull policies in Germany's solar policy mix》的 ABM 模型（德国光伏政策组合
+多主体模型），并用 LLM Agent 增强主体决策能力。两条主线：
+
+  1. 模型复现（论文 SI 的 Adopter/Manufacturer/Installer + 5 步调度 + 两阶段采用
+     （ideation 阈值 + NPV 双选）+ 双因子经验曲线 + 劳动力市场 + 宏观环境 + 历史数据）
+  2. LLM Agent 接入（Manufacturer/Adopter 接 LLM，ConversationMemory + tool calling +
+     Pydantic 校验 + 异步并发 + 确定性回退）
+
+======================================================================
+ 实际进度清单（2026-09-08 核对代码 + 跑测试/仿真后更新）
+======================================================================
+
+## 模型复现：约 95%（框架全落地 + 采用子模型已重写为论文两阶段）
+
+【已完成】
+- 主体类 Adopter/Manufacturer/Installer 完整定义（agents/ 目录）
+- 5 步调度循环（宏观→采用者→安装商→制造商→推进，model/solar_model.py）
+- 采用决策【两阶段】重写（submodels/adoption.py，论文 Equation 2-10）：
+  - 阶段一 ideation：k_peers·PE + k_info·IN + k_awareness·AW + k_attractive·IRR > 0.5
+    权重 0.52/0.17/0.12/0.19（Table SI 11），PE=1km 邻居比、IN=信息量、AW=环境意识、IRR=内部收益率
+  - 阶段二：早期采用者（AW>0.92 且 residential）直接安装；其余做 domestic/foreign NPV 双选，
+    选非负且最大者（平局偏好 domestic）
+  - IRR（代表家庭内部收益率，bisection）、信息量 IN_t（logistic 拟合世界累计装机，Table SI 15）、
+    规模效应 SE=1.1246·S^-0.051、外国组件折现溢价 R^f=1.1%
+- 环境意识恒定 N(0.5,0.2)（不再随媒体演化），早期采用者自然涌现（移除 20 种子 hack）
+- 双因子经验曲线（submodels/experience_curve.py，干中学 + 研究中学，参数已对齐 Table SI 53：
+  截距 α=2.882/2.448/3.354，log-log 斜率 β_LBD=-0.074/-0.448、β_LBR=-0.814/-0.074、
+  β_nonmodule=-0.155，含 learning_rate_to_beta 换算 + 知识存量单位重标定）
+- 劳动力市场（submodels/labor_market.py）
+- 宏观环境双模式（environment/macro_environment.py：合成 + 真实历史）
+- 历史数据加载（data/data_loader.py，内嵌 1991-2016 + CSV + 插值）
+- 分析可视化（analysis/metrics.py，含年度检查点 + 年度新增装机）
+- 集中配置（config.py，ModelConfig/AdopterConfig/ManufacturerConfig/InstallerConfig）
+- 收入/耐心异质性、屋顶面积→系统大小异质性、知识溢出 gap-proportional
+- 93 个单元测试全部通过（pytest ~0.8s）
+- 312-tick 公式模式跑通（12s）：最终 50/500 采用（10%）、0.6 MW，
+  S 曲线 1991 缓起 → 2004-2008 增长 → 2008+ 饱和；成本 Domestic 2.833→0.399 €/W(-85.9%)、
+  Foreign 2.444→0.084 €/W(-96.6%)（采用率 16.6%→10%，更接近真实 ~7%）
+
+## LLM Agent 接入：约 75%（DeepSeek 已接线，端到端跑通）
+
+【已完成】
+- Manufacturer LLM（AsyncOpenAI + gpt-4.1-mini，每月异步决策）
+- Adopter LLM（5% 采样率，异步并发）
+- ConversationMemory（滚动 6 轮记忆，接入 Adopter/Manufacturer 调用链）
+- BaseLLMAgent 基类（ask_llm / 记忆注入 / 结构化 JSON / tool calling / 回退）
+- Tool/ToolRegistry（OpenAI function-calling 格式）+ agents/tools.py 工具集
+- tool calling 已接入 Adopter.step_llm / Manufacturer.step_llm 多轮循环（max 3 轮）
+- Pydantic Schema 校验（ManufacturerDecision / AdopterDecision）
+- asyncio.gather 并发、use_llm 开关、确定性回退（LLM 失败→两阶段/经验曲线公式）
+
+【未完成 / 待推进】
+- （中）采用率 10% 仍略高于真实 ~7%，邻居半径 10km（vs 论文 1km）为 500 主体缩比补偿；
+  需空间索引支撑 2 万主体后改回 1km 并重新标定
+- （中）制造商 CP 用了世界累计装机（max(global_cum, own_CP)）而非论文"本区域累计产量"，
+  导致 foreign 成本被 global_cum 过度压低（→0.084 €/W，真实 ~0.3）。
+  已调查（第十三轮）：字面"改回自产 CP"会回归（foreign 2.24、domestic 0.761），
+  根因是国外制造商产量由全球市场驱动（外生），缩比模型无法内生复现。正确修复需
+  (a) 修正 global_cum 量级(~10x 膨胀) + (b) 为国外制造商引入外生区域产量序列。
+  已顺手修复 sales 从未更新的 bug（sales 追踪，见第十三轮）。
+- （已修复 2026-09-08）LLM 回退 bug：DeepSeek 返回 JSON 被散文/代码块包裹导致
+  model_validate_json 失败、全部静默回退。已在 agent_framework.py 加 extract_json_object()
+  助手并统一替换 4 处解析点，冒烟测试确认 0 回退。详见 测试记录.txt 第十二轮
+- 增大 agent 数量（邻居计算 O(n²) 需空间索引）
+- 接入 LangChain/AutoGen 等成熟 Agent 框架做多步推理
+
+======================================================================
+ 运行命令
+======================================================================
+
+  python main.py               # 公式模式，312 tick，~15s
+  python main.py --real-data   # 使用真实历史数据
+  python main.py --llm         # LLM 模式（读 .env 的 DEEPSEEK_API_KEY，deepseek-chat）
+  pytest tests/ -v             # 93 个测试

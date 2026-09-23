@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="content"
+     font-family="Microsoft YaHei, Segoe UI, system-ui, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#F7F5F0"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#C0562B"/>
+    <text x="72" y="96" font-size="18" fill="#16233A" fill-opacity="0.78">PART 5 · 偏差、进度与下一步</text>
+    <text x="72" y="142" font-size="42" font-weight="700" fill="#16233A">两处偏差已定位，但都还没有修</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="gap-adoption" data-pptx-bounds="72 200 552 400">
+    <use data-icon="tabler-outline/alert-triangle" x="72" y="206" width="30" height="30" fill="#C0562B" stroke-width="2"/>
+    <text x="116" y="230" font-size="24" font-weight="700" fill="#16233A">偏差一 · 采用率偏高</text>
+    <text x="72" y="286" font-size="18" font-weight="700" fill="#C0562B">偏差</text>
+    <text x="132" y="286" font-size="18" fill="#35322C">模型 10%，真实约 7%</text>
+    <text x="72" y="352" font-size="18" font-weight="700" fill="#C0562B">根因</text>
+    <text x="132" y="352" font-size="18" fill="#35322C"><tspan x="132" dy="0">邻居半径用 10 km（论文为 1 km），</tspan><tspan x="132" dy="28">是为 500 主体缩比做的补偿；1 km 下</tspan><tspan x="132" dy="28">平均只有 0.16 个邻居，社会影响无法启动。</tspan></text>
+    <text x="72" y="500" font-size="18" font-weight="700" fill="#C0562B">修法</text>
+    <text x="132" y="500" font-size="18" fill="#35322C"><tspan x="132" dy="0">接入空间索引、主体扩到 2 万后</tspan><tspan x="132" dy="28">改回 1 km 并重新标定。</tspan></text>
+  </g>
+
+  <line id="gap-divider" data-pptx-role="decoration" x1="668" y1="212" x2="668" y2="592" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+
+  <g id="gap-cost" data-pptx-bounds="704 200 504 400">
+    <use data-icon="tabler-outline/alert-triangle" x="704" y="206" width="30" height="30" fill="#C0562B" stroke-width="2"/>
+    <text x="748" y="230" font-size="24" font-weight="700" fill="#16233A">偏差二 · 国外成本塌缩</text>
+    <text x="704" y="286" font-size="18" font-weight="700" fill="#C0562B">偏差</text>
+    <text x="764" y="286" font-size="18" fill="#35322C">模型 0.084 €/W，真实约 0.3 €/W</text>
+    <text x="704" y="352" font-size="18" font-weight="700" fill="#C0562B">根因</text>
+    <text x="764" y="352" font-size="18" fill="#35322C"><tspan x="764" dy="0">学习驱动量用"全球累计装机"替代论文</tspan><tspan x="764" dy="28">要求的"本区域累计产量"，且合成量级</tspan><tspan x="764" dy="28">膨胀约 10 倍，被 β = −0.448 放大。</tspan></text>
+    <text x="704" y="500" font-size="18" font-weight="700" fill="#C0562B">修法</text>
+    <text x="764" y="500" font-size="18" fill="#35322C"><tspan x="764" dy="0">修正全球装机量级，并为国外厂商</tspan><tspan x="764" dy="28">引入外生区域产量序列。</tspan></text>
+  </g>
+
+  <g id="gap-note" data-pptx-bounds="72 600 1136 44">
+    <text x="72" y="630" font-size="16" fill="#35322C" fill-opacity="0.85">字面改回"自产累计产量"会反向失真（国外 2.24、国内 0.761 €/W）；取舍分析见测试记录第十三轮。</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#16233A" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="16" fill="#35322C" fill-opacity="0.72">两处偏差均为已知且已定位，不是未发现的问题</text>
+    <text x="1208" y="690" font-size="16" fill="#35322C" fill-opacity="0.72" text-anchor="end">12 / 14</text>
+  </g>
+
+</svg>

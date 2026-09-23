@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="content"
+     font-family="Microsoft YaHei, Segoe UI, system-ui, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#F7F5F0"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#C0562B"/>
+    <text x="72" y="96" font-size="18" fill="#16233A" fill-opacity="0.78">PART 5 · 偏差、进度与下一步</text>
+    <text x="72" y="142" font-size="42" font-weight="700" fill="#16233A">主线一到 95%，主线二到 75%</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="progress-bars" data-pptx-bounds="72 200 620 400">
+    <text x="72" y="252" font-size="24" font-weight="700" fill="#16233A">主线一 · 模型复现</text>
+    <text x="620" y="252" font-family="Consolas, Microsoft YaHei, monospace" font-size="32" font-weight="700" fill="#C0562B" text-anchor="end">≈ 95%</text>
+    <rect x="72" y="278" width="548" height="12" fill="#EDE8DF"/>
+    <rect x="72" y="278" width="520.6" height="12" fill="#C0562B"/>
+    <text x="72" y="326" font-size="18" fill="#35322C"><tspan x="72" dy="0">主体定义 · 五步调度 · 两阶段采用 · 经验曲线</tspan><tspan x="72" dy="26">劳动力市场 · 宏观与历史数据 · 分析可视化</tspan></text>
+
+    <text x="72" y="404" font-size="24" font-weight="700" fill="#16233A">主线二 · LLM 增强</text>
+    <text x="620" y="404" font-family="Consolas, Microsoft YaHei, monospace" font-size="32" font-weight="700" fill="#2E6F6A" text-anchor="end">≈ 75%</text>
+    <rect x="72" y="430" width="548" height="12" fill="#EDE8DF"/>
+    <rect x="72" y="430" width="411" height="12" fill="#2E6F6A"/>
+    <text x="72" y="478" font-size="18" fill="#35322C">DeepSeek 接线 · 工具调用 · 对话记忆 · 并发 · 校验 · 确定性回退</text>
+
+    <text x="72" y="548" font-size="18" fill="#16233A">复现部分已可依赖；LLM 部分可用，但覆盖范围仍有限。</text>
+  </g>
+
+  <g id="verification-checklist" data-pptx-bounds="740 200 468 400">
+    <use data-icon="tabler-outline/circle-check" x="740" y="228" width="24" height="24" fill="#2E6F6A" stroke-width="2"/>
+    <text x="780" y="248" font-size="18" fill="#35322C">312 tick 公式模式完整跑通</text>
+    <use data-icon="tabler-outline/circle-check" x="740" y="288" width="24" height="24" fill="#2E6F6A" stroke-width="2"/>
+    <text x="780" y="308" font-size="18" fill="#35322C">93 个单元测试全部通过（约 0.8 秒）</text>
+    <use data-icon="tabler-outline/circle-check" x="740" y="348" width="24" height="24" fill="#2E6F6A" stroke-width="2"/>
+    <text x="780" y="368" font-size="18" fill="#35322C"><tspan x="780" dy="0">DeepSeek 三项能力实测通过</tspan><tspan x="780" dy="26">（基础对话 / JSON 输出 / function calling）</tspan></text>
+    <use data-icon="tabler-outline/circle-check" x="740" y="428" width="24" height="24" fill="#2E6F6A" stroke-width="2"/>
+    <text x="780" y="448" font-size="18" fill="#35322C"><tspan x="780" dy="0">LLM 回退缺陷已修复</tspan><tspan x="780" dy="26">冒烟测试确认 0 回退</tspan></text>
+    <use data-icon="tabler-outline/circle-check" x="740" y="508" width="24" height="24" fill="#2E6F6A" stroke-width="2"/>
+    <text x="780" y="528" font-size="18" fill="#35322C">真实历史数据模式可切换</text>
+  </g>
+
+  <g id="code-debt" data-pptx-bounds="72 596 1136 50">
+    <text x="72" y="622" font-size="16" fill="#35322C" fill-opacity="0.85">已知代码债：config.py 参数中心未接入主流程，参数硬编码在 solar_model.py；submodels/tpb.py 为早期版本，仅测试引用。</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#16233A" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="16" fill="#35322C" fill-opacity="0.72">当前版本状态：复现主线稳定，LLM 主线可用但尚未覆盖全部主体</text>
+    <text x="1208" y="690" font-size="16" fill="#35322C" fill-opacity="0.72" text-anchor="end">13 / 14</text>
+  </g>
+
+</svg>

@@ -1,0 +1,76 @@
+{
+  "schema": "ppt-master.svg-quality-report.v1",
+  "stage": "first-page",
+  "target": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920",
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "digest": "1d6f5e65f8bd50bf92dbb970f9ed00788fe298e92e1e084680cf6bdf119e6535",
+    "file_count": 1,
+    "files": [
+      {
+        "file": "01_cover.svg",
+        "sha256": "918e7ededaa7074da4b786e2d02cb62eed6b6a97fd03ce76a4d0db2119a5ba89"
+      }
+    ]
+  },
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "warnings": 0,
+    "errors": 0
+  },
+  "issue_types": {},
+  "categories": {
+    "blocking": {
+      "count": 0,
+      "issues": []
+    },
+    "introduced": {
+      "count": 0,
+      "issues": []
+    },
+    "inherited": {
+      "count": 0,
+      "issues": []
+    },
+    "source-import": {
+      "count": 0,
+      "summary": {
+        "warning_count": 0,
+        "by_code": {}
+      }
+    }
+  },
+  "drift": {
+    "colors": {},
+    "fonts": {},
+    "sizes": {}
+  },
+  "project_issues": {
+    "template": [],
+    "animation": [],
+    "illustration": [],
+    "communication_trace": [],
+    "pptx_structure": []
+  },
+  "files": [
+    {
+      "file": "01_cover.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\01_cover.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 11,
+        "tspan_elements": 5
+      },
+      "passed": true,
+      "source_sha256": "918e7ededaa7074da4b786e2d02cb62eed6b6a97fd03ce76a4d0db2119a5ba89"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="toc"
+     font-family="Microsoft YaHei, Segoe UI, system-ui, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#F7F5F0"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#C0562B"/>
+    <text x="72" y="96" font-size="18" fill="#16233A" fill-opacity="0.78">概览</text>
+    <text x="72" y="142" font-size="42" font-weight="700" fill="#16233A">汇报结构</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="outline-list" data-pptx-bounds="72 200 700 420">
+    <text x="72" y="248" font-family="Consolas, Microsoft YaHei, monospace" font-size="24" font-weight="700" fill="#C0562B">01</text>
+    <text x="150" y="248" font-size="24" font-weight="700" fill="#16233A">项目与系统</text>
+    <text x="150" y="276" font-size="18" fill="#35322C" fill-opacity="0.85">P03–P05 · 论文问题、四类角色、五步调度 · 约 4 分钟</text>
+    <text x="72" y="322" font-family="Consolas, Microsoft YaHei, monospace" font-size="24" font-weight="700" fill="#C0562B">02</text>
+    <text x="150" y="322" font-size="24" font-weight="700" fill="#16233A">复现的三个核心机制</text>
+    <text x="150" y="350" font-size="18" fill="#35322C" fill-opacity="0.85">P06–P08 · 两阶段采用、经验曲线、渠道与劳动力 · 约 5 分钟</text>
+    <text x="72" y="396" font-family="Consolas, Microsoft YaHei, monospace" font-size="24" font-weight="700" fill="#C0562B">03</text>
+    <text x="150" y="396" font-size="24" font-weight="700" fill="#16233A">LLM 增强接在哪里</text>
+    <text x="150" y="424" font-size="18" fill="#35322C" fill-opacity="0.85">P09 · 接入点、工具调用、回退链 · 约 2 分钟</text>
+    <text x="72" y="470" font-family="Consolas, Microsoft YaHei, monospace" font-size="24" font-weight="700" fill="#C0562B">04</text>
+    <text x="150" y="470" font-size="24" font-weight="700" fill="#16233A">结果与验证</text>
+    <text x="150" y="498" font-size="18" fill="#35322C" fill-opacity="0.85">P10–P11 · 四联结果图、关键数字与检查点 · 约 4 分钟</text>
+    <text x="72" y="544" font-family="Consolas, Microsoft YaHei, monospace" font-size="24" font-weight="700" fill="#C0562B">05</text>
+    <text x="150" y="544" font-size="24" font-weight="700" fill="#16233A">偏差、进度与下一步</text>
+    <text x="150" y="572" font-size="18" fill="#35322C" fill-opacity="0.85">P12–P14 · 两处偏差根因、完成度、优先级建议 · 约 4 分钟</text>
+  </g>
+
+  <g id="outline-note" data-pptx-bounds="820 200 388 300">
+    <rect x="820" y="214" width="4" height="132" fill="#C0562B"/>
+    <text x="856" y="248" font-size="24" fill="#16233A"><tspan x="856" dy="0">前两段讲我们造了什么，</tspan><tspan x="856" dy="38">后三段讲它算出了什么、</tspan><tspan x="856" dy="38">哪里还不能信、下一步做什么</tspan></text>
+    <text x="856" y="392" font-size="16" fill="#35322C" fill-opacity="0.72">每页都可独立阅读，会后可当存档材料看</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#16233A" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="16" fill="#35322C" fill-opacity="0.72">德国光伏政策组合 ABM · 复现与 LLM 增强</text>
+    <text x="1208" y="690" font-size="16" fill="#35322C" fill-opacity="0.72" text-anchor="end">02 / 14</text>
+  </g>
+
+</svg>

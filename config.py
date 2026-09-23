@@ -21,7 +21,7 @@ class ModelConfig:
     seed: int = 42
 
     # LLM settings
-    llm_model: str = "gpt-4.1-mini"
+    llm_model: str = "deepseek-chat"
     llm_temperature: float = 0.3
     llm_adopter_fraction: float = 0.05  # fraction of undecided adopters using LLM per tick
     llm_max_retries: int = 2
@@ -81,7 +81,7 @@ class AdopterConfig:
     w_pbc: float = 0.15
     w_env: float = 0.4
     w_eco: float = 0.6
-    env_shortcut_threshold: float = 0.88
+    env_shortcut_threshold: float = 0.92
 
     # NPV calculation
     system_lifespan_months: int = 240
@@ -94,8 +94,8 @@ class ManufacturerConfig:
     # Domestic manufacturer defaults
     domestic_capacity: float = 500.0            # MW/month
     domestic_module_efficiency: float = 0.15    # 15%
-    domestic_production_cost: float = 1.50      # EUR/W
-    domestic_price: float = 2.25                # EUR/W
+    domestic_production_cost: float = 2.882     # EUR/W (Table SI 53 intercept α)
+    domestic_price: float = 4.323               # EUR/W
     domestic_knowledge_stock: float = 100.0
     domestic_cumulative_production: float = 500.0
     domestic_stock: float = 100.0
@@ -103,10 +103,10 @@ class ManufacturerConfig:
     domestic_labor_productivity: float = 2.5    # kWp/month/worker
     domestic_mark_up: float = 0.50
     domestic_rd_spending_ratio: float = 0.05
-    domestic_rd_spending: float = 50_000.0
-    domestic_learning_by_doing: float = 0.20
-    domestic_learning_by_research: float = 0.10
-    domestic_experience_intercept: float = 1.50
+    domestic_rd_spending: float = 3.0
+    domestic_beta_learning_by_doing: float = -0.074    # LR 5.0% (Table SI 53)
+    domestic_beta_learning_by_research: float = -0.814  # LR 43.1%
+    domestic_experience_intercept: float = 2.882
     domestic_knowledge_depreciation: float = 0.008742
     domestic_spillover_in: float = 0.15
     domestic_spillover_delay: int = 12
@@ -114,8 +114,8 @@ class ManufacturerConfig:
     # Foreign manufacturer defaults
     foreign_capacity: float = 2_000.0
     foreign_module_efficiency: float = 0.14
-    foreign_production_cost: float = 1.10
-    foreign_price: float = 1.43
+    foreign_production_cost: float = 2.448      # EUR/W (Table SI 53 intercept α)
+    foreign_price: float = 3.182                # EUR/W
     foreign_knowledge_stock: float = 200.0
     foreign_cumulative_production: float = 2_000.0
     foreign_stock: float = 500.0
@@ -123,10 +123,10 @@ class ManufacturerConfig:
     foreign_labor_productivity: float = 4.0
     foreign_mark_up: float = 0.30
     foreign_rd_spending_ratio: float = 0.02
-    foreign_rd_spending: float = 30_000.0
-    foreign_learning_by_doing: float = 0.18
-    foreign_learning_by_research: float = 0.08
-    foreign_experience_intercept: float = 1.10
+    foreign_rd_spending: float = 6.0
+    foreign_beta_learning_by_doing: float = -0.448     # LR 26.7% (Table SI 53)
+    foreign_beta_learning_by_research: float = -0.074  # LR 5.0%
+    foreign_experience_intercept: float = 2.448
     foreign_knowledge_depreciation: float = 0.008742
     foreign_spillover_in: float = 0.10
     foreign_spillover_delay: int = 18
@@ -171,7 +171,7 @@ class InstallerConfig:
 
     # Non-module experience curve (Table SI 5)
     experience_curve_intercept: float = 3.354
-    learning_by_doing_rate: float = 0.102
+    beta_learning_by_doing: float = -0.155   # LR 10.2% (Table SI 53)
 
     # Workforce constraints
     min_employees: int = 1_000

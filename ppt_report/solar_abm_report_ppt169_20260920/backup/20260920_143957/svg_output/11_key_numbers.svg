@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="content"
+     font-family="Microsoft YaHei, Segoe UI, system-ui, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#F7F5F0"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#C0562B"/>
+    <text x="72" y="96" font-size="18" fill="#16233A" fill-opacity="0.78">PART 4 · 结果与验证</text>
+    <text x="72" y="142" font-size="42" font-weight="700" fill="#16233A">关键数字与年度检查点</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="result-kpis" data-pptx-bounds="72 200 1136 100">
+    <rect x="72" y="204" width="260" height="92" fill="#EDE8DF"/>
+    <text x="96" y="258" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#16233A">50/500</text>
+    <text x="96" y="286" font-size="18" fill="#35322C">累计采用户数（10%）</text>
+    <rect x="356" y="204" width="260" height="92" fill="#EDE8DF"/>
+    <text x="380" y="258" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#16233A">0.6 MW</text>
+    <text x="380" y="286" font-size="18" fill="#35322C">累计装机</text>
+    <rect x="640" y="204" width="260" height="92" fill="#EDE8DF"/>
+    <text x="664" y="258" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#C0562B">−85.9%</text>
+    <text x="664" y="286" font-size="18" fill="#35322C">国内组件成本降幅</text>
+    <rect x="924" y="204" width="284" height="92" fill="#EDE8DF"/>
+    <text x="948" y="258" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#16233A">93</text>
+    <text x="948" y="286" font-size="18" fill="#35322C">单元测试全部通过</text>
+  </g>
+
+  <g id="result-checkpoints" data-pptx-bounds="72 330 700 300">
+    <text x="72" y="380" font-size="18" font-weight="700" fill="#16233A">年末</text>
+    <text x="300" y="380" font-size="18" font-weight="700" fill="#16233A">累计采用（户）</text>
+    <line x1="72" y1="396" x2="700" y2="396" stroke="#16233A" stroke-opacity="0.35" stroke-width="1"/>
+    <text x="72" y="432" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#35322C">1991</text>
+    <text x="300" y="432" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">6</text>
+    <line x1="72" y1="450" x2="700" y2="450" stroke="#16233A" stroke-opacity="0.15" stroke-width="1"/>
+    <text x="72" y="486" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#35322C">2000</text>
+    <text x="300" y="486" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">8</text>
+    <line x1="72" y1="504" x2="700" y2="504" stroke="#16233A" stroke-opacity="0.15" stroke-width="1"/>
+    <text x="72" y="540" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#35322C">2004</text>
+    <text x="300" y="540" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">22</text>
+    <line x1="72" y1="558" x2="700" y2="558" stroke="#16233A" stroke-opacity="0.15" stroke-width="1"/>
+    <text x="72" y="594" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#35322C">2008</text>
+    <text x="300" y="594" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">50</text>
+    <line x1="72" y1="612" x2="700" y2="612" stroke="#16233A" stroke-opacity="0.15" stroke-width="1"/>
+    <text x="480" y="432" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#35322C">2012</text>
+    <text x="640" y="432" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">50</text>
+    <text x="480" y="486" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#35322C">2016</text>
+    <text x="640" y="486" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">50</text>
+  </g>
+
+  <g id="adoption-curve" data-pptx-bounds="820 330 388 300">
+    <text x="820" y="356" font-size="16" fill="#35322C" fill-opacity="0.85">累计采用（户）· 年末</text>
+    <g id="adoption-curve-chartArea">
+      <line x1="860" y1="380" x2="860" y2="560" stroke="#16233A" stroke-opacity="0.35" stroke-width="1"/>
+      <line x1="860" y1="560" x2="1160" y2="560" stroke="#16233A" stroke-opacity="0.35" stroke-width="1"/>
+      <!-- chart-plot-area: object=adoption-curve | 860,380,1160,560 -->
+      <polyline points="860,538.4 968,531.2 1016,480.8 1064,380 1112,380 1160,380"
+                fill="none" stroke="#C0562B" stroke-width="3"/>
+    </g>
+    <text x="848" y="386" font-family="Consolas, Microsoft YaHei, monospace" font-size="14" fill="#35322C" fill-opacity="0.85" text-anchor="end">50</text>
+    <text x="848" y="564" font-family="Consolas, Microsoft YaHei, monospace" font-size="14" fill="#35322C" fill-opacity="0.85" text-anchor="end">0</text>
+    <text x="860" y="584" font-family="Consolas, Microsoft YaHei, monospace" font-size="14" fill="#35322C" fill-opacity="0.85">1991</text>
+    <text x="1064" y="584" font-family="Consolas, Microsoft YaHei, monospace" font-size="14" fill="#35322C" fill-opacity="0.85" text-anchor="middle">2008</text>
+    <text x="1160" y="584" font-family="Consolas, Microsoft YaHei, monospace" font-size="14" fill="#35322C" fill-opacity="0.85" text-anchor="end">2016</text>
+    <text x="820" y="614" font-size="16" fill="#35322C" fill-opacity="0.85">真实采用率约 7%，本模型 10%：偏差来源见下页</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#16233A" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="16" fill="#35322C" fill-opacity="0.72">公式模式跑完 312 tick 约 12–15 秒；LLM 模式受 API 速率限制需节流</text>
+    <text x="1208" y="690" font-size="16" fill="#35322C" fill-opacity="0.72" text-anchor="end">11 / 14</text>
+  </g>
+
+</svg>

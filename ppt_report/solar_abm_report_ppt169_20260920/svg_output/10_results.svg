@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="content"
+     font-family="Microsoft YaHei, Segoe UI, system-ui, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#F7F5F0"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#C0562B"/>
+    <text x="72" y="96" font-size="18" fill="#16233A" fill-opacity="0.78">PART 4 · 结果与验证</text>
+    <text x="72" y="142" font-size="42" font-weight="700" fill="#16233A">政策点燃 → 成本下降 → 退坡后饱和</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="result-figure" data-pptx-bounds="72 200 700 440">
+    <image href="../images/results.png" x="99.5" y="200" width="645" height="430"
+           preserveAspectRatio="xMidYMid meet"/>
+    <text x="99.5" y="622" font-size="16" fill="#35322C" fill-opacity="0.72">四个面板：累计装机 / 组件成本 / 累计采用者 / 政策与价格信号</text>
+  </g>
+
+  <g id="result-readout" data-pptx-bounds="792 200 416 440">
+    <text x="792" y="240" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" font-weight="700" fill="#C0562B">01</text>
+    <text x="836" y="240" font-size="18" font-weight="700" fill="#16233A">累计装机呈 S 形</text>
+    <text x="836" y="268" font-size="18" fill="#35322C"><tspan x="836" dy="0">1991–2000 几乎贴地，</tspan><tspan x="836" dy="26">2004–2008 最陡，终点 0.6 MW</tspan></text>
+
+    <text x="792" y="346" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" font-weight="700" fill="#C0562B">02</text>
+    <text x="836" y="346" font-size="18" font-weight="700" fill="#16233A">两条成本曲线分岔</text>
+    <text x="836" y="374" font-size="18" fill="#35322C"><tspan x="836" dy="0">国内 −85.9%、国外 −96.6%；</tspan><tspan x="836" dy="26">2000 年后差距迅速拉开</tspan></text>
+
+    <text x="792" y="462" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" font-weight="700" fill="#C0562B">03</text>
+    <text x="836" y="462" font-size="18" font-weight="700" fill="#16233A">采用者同样呈 S 形</text>
+    <text x="836" y="490" font-size="18" fill="#35322C"><tspan x="836" dy="0">50 / 500 = 10%；</tspan><tspan x="836" dy="26">2008 年之后再无新增</tspan></text>
+
+    <text x="792" y="552" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" font-weight="700" fill="#C0562B">04</text>
+    <text x="836" y="552" font-size="18" font-weight="700" fill="#16233A">政策信号先行</text>
+    <text x="836" y="580" font-size="18" fill="#35322C"><tspan x="836" dy="0">FiT 2000 年上线、2004–2008 见顶，</tspan><tspan x="836" dy="26">此后持续退坡</tspan></text>
+    <text x="792" y="626" font-size="16" fill="#35322C" fill-opacity="0.85">结论：采纳是被政策点燃的，不是自发的</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#16233A" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="16" fill="#35322C" fill-opacity="0.72">运行条件：312 tick · seed=42 · 合成数据 · 公式模式（不含 LLM）</text>
+    <text x="1208" y="690" font-size="16" fill="#35322C" fill-opacity="0.72" text-anchor="end">10 / 14</text>
+  </g>
+
+</svg>

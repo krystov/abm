@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="content"
+     font-family="Microsoft YaHei, Segoe UI, system-ui, sans-serif">
+
+  <defs>
+    <marker id="arrow-step" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <polygon points="0,0 10,5 0,10" fill="#C0562B"/>
+    </marker>
+  </defs>
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#F7F5F0"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#C0562B"/>
+    <text x="72" y="96" font-size="18" fill="#16233A" fill-opacity="0.78">PART 1 · 项目与系统</text>
+    <text x="72" y="142" font-size="42" font-weight="700" fill="#16233A">每个 tick（= 1 个月）严格按五步执行</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="schedule-strip" data-pptx-bounds="72 200 1136 330">
+    <line x1="72" y1="222" x2="282" y2="222" stroke="#C0562B" stroke-width="2"/>
+    <text x="72" y="286" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#C0562B">01</text>
+    <text x="72" y="334" font-size="24" font-weight="700" fill="#16233A">更新宏观</text>
+    <text x="72" y="372" font-size="18" fill="#35322C"><tspan x="72" dy="0">读取当月电价、</tspan><tspan x="72" dy="26">FiT、媒体关注度、</tspan><tspan x="72" dy="26">研发强度</tspan></text>
+    <line x1="286" y1="286" x2="296" y2="286" stroke="#C0562B" stroke-width="2" marker-end="url(#arrow-step)"/>
+
+    <line x1="300" y1="222" x2="510" y2="222" stroke="#C0562B" stroke-width="2"/>
+    <text x="300" y="286" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#C0562B">02</text>
+    <text x="300" y="334" font-size="24" font-weight="700" fill="#16233A">采用者决策</text>
+    <text x="300" y="372" font-size="18" fill="#35322C"><tspan x="300" dy="0">未安装者评估是否</tspan><tspan x="300" dy="26">安装，新需求进入</tspan><tspan x="300" dy="26">待安装队列</tspan></text>
+    <line x1="514" y1="286" x2="524" y2="286" stroke="#C0562B" stroke-width="2" marker-end="url(#arrow-step)"/>
+
+    <line x1="528" y1="222" x2="738" y2="222" stroke="#C0562B" stroke-width="2"/>
+    <text x="528" y="286" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#C0562B">03</text>
+    <text x="528" y="334" font-size="24" font-weight="700" fill="#16233A">安装商响应</text>
+    <text x="528" y="372" font-size="18" fill="#35322C"><tspan x="528" dy="0">按产能消化订单，</tspan><tspan x="528" dy="26">调整用工与非组件</tspan><tspan x="528" dy="26">成本报价</tspan></text>
+    <line x1="742" y1="286" x2="752" y2="286" stroke="#C0562B" stroke-width="2" marker-end="url(#arrow-step)"/>
+
+    <line x1="756" y1="222" x2="966" y2="222" stroke="#C0562B" stroke-width="2"/>
+    <text x="756" y="286" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#C0562B">04</text>
+    <text x="756" y="334" font-size="24" font-weight="700" fill="#16233A">制造商更新</text>
+    <text x="756" y="372" font-size="18" fill="#35322C"><tspan x="756" dy="0">结算累计产量、更新</tspan><tspan x="756" dy="26">知识存量，按经验</tspan><tspan x="756" dy="26">曲线更新成本</tspan></text>
+    <line x1="970" y1="286" x2="980" y2="286" stroke="#C0562B" stroke-width="2" marker-end="url(#arrow-step)"/>
+
+    <line x1="984" y1="222" x2="1194" y2="222" stroke="#C0562B" stroke-width="2"/>
+    <text x="984" y="286" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#C0562B">05</text>
+    <text x="984" y="334" font-size="24" font-weight="700" fill="#16233A">时钟推进</text>
+    <text x="984" y="372" font-size="18" fill="#35322C"><tspan x="984" dy="0">记录装机量、就业</tspan><tspan x="984" dy="26">与价格，进入下一</tspan><tspan x="984" dy="26">个月</tspan></text>
+  </g>
+
+  <g id="schedule-note" data-pptx-bounds="72 550 1136 90">
+    <rect x="72" y="558" width="4" height="60" fill="#C0562B"/>
+    <text x="104" y="582" font-size="18" fill="#16233A"><tspan x="104" dy="0">顺序不可颠倒：宏观变量先更新，采用者当月决策、安装商当月响应，制造商在本月销量结算后更新成本。</tspan><tspan x="104" dy="28">26 年 × 12 个月 = 312 个 tick，实现于 model/solar_model.py 的 step()，对应论文补充材料 §1.1.5。</tspan></text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#16233A" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="16" fill="#35322C" fill-opacity="0.72">仿真周期：1991–2016，共 312 个月</text>
+    <text x="1208" y="690" font-size="16" fill="#35322C" fill-opacity="0.72" text-anchor="end">05 / 14</text>
+  </g>
+
+</svg>

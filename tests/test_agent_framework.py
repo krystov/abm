@@ -2,7 +2,40 @@
 
 import asyncio
 
-from agents.agent_framework import BaseLLMAgent, ConversationMemory, Tool, ToolRegistry
+import pytest
+
+from agents.agent_framework import (
+    BaseLLMAgent,
+    ConversationMemory,
+    Tool,
+    ToolRegistry,
+    extract_json_object,
+)
+
+
+class TestExtractJsonObject:
+    def test_pure_json(self):
+        assert extract_json_object('{"a": 1, "b": "x"}') == {"a": 1, "b": "x"}
+
+    def test_json_wrapped_in_markdown_fence(self):
+        text = '```json\n{"action": "expand", "change_percentage": 0.1}\n```'
+        assert extract_json_object(text) == {"action": "expand", "change_percentage": 0.1}
+
+    def test_prose_before_json(self):
+        text = 'Based on the data:\n- demand is weak\n{"action": "reduce", "change_percentage": 0.05}'
+        assert extract_json_object(text) == {"action": "reduce", "change_percentage": 0.05}
+
+    def test_prose_and_trailing_fence(self):
+        text = 'Let me analyze the decision.\n```json\n{"will_adopt": true, "confidence": 0.7}\n```'
+        assert extract_json_object(text) == {"will_adopt": True, "confidence": 0.7}
+
+    def test_empty_content_raises(self):
+        with pytest.raises(ValueError):
+            extract_json_object("")
+
+    def test_no_json_raises(self):
+        with pytest.raises(ValueError):
+            extract_json_object("just some prose with no object")
 
 
 class TestConversationMemory:

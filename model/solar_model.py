@@ -14,7 +14,11 @@ from typing import Dict, List
 from agents import Adopter, AdopterType, Installer, Manufacturer, Region
 from environment.macro_environment import MacroEnvironment
 from schemas import ManufacturerDecision
-from submodels.tpb import compute_npv, compute_tpb_intention
+from submodels.adoption import (
+    compute_irr,
+    evaluate_adoption,
+    information_index,
+)
 from submodels.experience_curve import compute_non_module_cost
 from submodels.labor_market import adjust_workforce
 
@@ -39,12 +43,12 @@ class SolarModel:
         self,
         n_ticks: int = 312,
         n_adopters: int = 500,
-        llm_model: str = "gpt-4.1-mini",
+        llm_model: str = "deepseek-chat",
         seed: int = 42,
         llm_adopter_fraction: float = 0.05,
         use_llm: bool = True,
         use_real_data: bool = False,
-        n_seed_adopters: int = 20,
+        n_seed_adopters: int = 0,
     ):
         self.n_ticks = n_ticks
         self.n_adopters = n_adopters
@@ -92,6 +96,7 @@ class SolarModel:
             if r < residential_frac:
                 at = AdopterType.RESIDENTIAL
                 sys_min, sys_max = 0.5, 10.0
+                roof_mean, roof_sd = 45.0, 20.0   # usable roof area [m²]
                 elec_price = 0.25
                 disc_rate = 0.04
                 self_cons_mean = 0.30
@@ -100,6 +105,7 @@ class SolarModel:
             elif r < residential_frac + commercial_frac:
                 at = AdopterType.COMMERCIAL_INDUSTRIAL
                 sys_min, sys_max = 10.0, 40.0
+                roof_mean, roof_sd = 150.0, 60.0
                 elec_price = 0.20
                 disc_rate = 0.05
                 self_cons_mean = 0.20
@@ -108,13 +114,18 @@ class SolarModel:
             else:
                 at = AdopterType.UTILITY_SCALE
                 sys_min, sys_max = 40.0, 500.0  # cap for manageable scale
+                roof_mean, roof_sd = 1_200.0, 800.0
                 elec_price = 0.18
                 disc_rate = 0.06
                 self_cons_mean = 0.40
                 consumption_mean = 50_000.0
                 consumption_sd = 10_000.0
 
-            system_size = self.rng.uniform(sys_min, sys_max)
+            # Roof area drives system size (physical constraint), clipped to the
+            # category's calibrated system-size range (Table SI 1).
+            roof_size = max(1.0, self.rng.gauss(roof_mean, roof_sd))
+            power_density = 0.15  # kWp per m² of usable roof
+            system_size = round(max(sys_min, min(sys_max, roof_size * power_density)), 2)
 
             # Personal adoption threshold: innovator→laggard spectrum
             # N(0.50, 0.08) clipped → ~2% below 0.32, ~2% above 0.68
@@ -128,6 +139,7 @@ class SolarModel:
                 agent_id=i,
                 adopter_type=at,
                 location=(self.rng.uniform(0, 100), self.rng.uniform(0, 100)),
+                roof_size=round(roof_size, 2),
                 system_size=round(system_size, 2),
                 self_consumption_rate=round(
                     max(0.0, min(1.0, self.rng.gauss(self_cons_mean, 0.05))), 4
@@ -152,8 +164,8 @@ class SolarModel:
             region=Region.DOMESTIC,
             capacity=500.0,          # MW/month
             module_efficiency=0.15,  # 15 %
-            production_cost=1.50,    # €/W
-            price=2.25,              # €/W (50 % mark-up)
+            production_cost=2.882,   # €/W (Table SI 53 intercept α)
+            price=4.323,             # €/W (50 % mark-up on intercept)
             knowledge_stock=100.0,
             cumulative_production=500.0,
             stock=100.0,
@@ -163,10 +175,10 @@ class SolarModel:
             labor_productivity=2.5,  # kWp/month/worker
             mark_up=0.50,
             rd_spending_ratio=0.05,
-            rd_spending=50_000.0,    # € (5 % of hypothetical revenue)
-            learning_by_doing_rate=0.20,
-            learning_by_research_rate=0.10,
-            experience_curve_intercept=1.50,
+            rd_spending=3.0,         # knowledge-stock increment/month (β_LBR=−0.814)
+            beta_learning_by_doing=-0.074,   # LR 5.0% (Table SI 53)
+            beta_learning_by_research=-0.814,  # LR 43.1%
+            experience_curve_intercept=2.882,
             knowledge_depreciation=0.008742,
             knowledge_spillover_in_ratio=0.15,
             knowledge_spillover_delay=12,
@@ -177,8 +189,8 @@ class SolarModel:
             region=Region.FOREIGN,
             capacity=2_000.0,         # MW/month — much larger
             module_efficiency=0.14,   # 14 %
-            production_cost=1.10,     # €/W — lower cost base
-            price=1.43,               # €/W (30 % mark-up)
+            production_cost=2.448,    # €/W (Table SI 53 intercept α)
+            price=3.182,              # €/W (30 % mark-up on intercept)
             knowledge_stock=200.0,
             cumulative_production=2_000.0,
             stock=500.0,
@@ -188,10 +200,10 @@ class SolarModel:
             labor_productivity=4.0,
             mark_up=0.30,
             rd_spending_ratio=0.02,
-            rd_spending=30_000.0,
-            learning_by_doing_rate=0.18,
-            learning_by_research_rate=0.08,
-            experience_curve_intercept=1.10,
+            rd_spending=6.0,          # knowledge-stock increment/month
+            beta_learning_by_doing=-0.448,   # LR 26.7% (Table SI 53)
+            beta_learning_by_research=-0.074,  # LR 5.0%
+            experience_curve_intercept=2.448,
             knowledge_depreciation=0.008742,
             knowledge_spillover_in_ratio=0.10,
             knowledge_spillover_delay=18,
@@ -212,7 +224,7 @@ class SolarModel:
             cumulative_installations=200.0,
             ci_initial=200.0,
             experience_curve_intercept_non_module=3.354,
-            learning_by_doing_rate_non_module=0.102,
+            beta_learning_by_doing_non_module=-0.155,
         )
         for_inst = Installer(
             installer_id=2,
@@ -227,7 +239,7 @@ class SolarModel:
             cumulative_installations=800.0,
             ci_initial=800.0,
             experience_curve_intercept_non_module=3.354,
-            learning_by_doing_rate_non_module=0.102,
+            beta_learning_by_doing_non_module=-0.155,
         )
         self.installers = {"domestic": dom_inst, "foreign": for_inst}
 
@@ -261,20 +273,25 @@ class SolarModel:
         module_price_domestic: float,
         module_price_foreign: float,
         bos_cost_domestic: float,
+        information: float,
+        irr: float,
     ) -> float:
         """Process un-adopted adopters; add new demand to pending installation queue.
 
         A fraction (llm_adopter_fraction) of eligible adopters use LLM via
-        asyncio.gather; the rest use the deterministic TPB formula.
-        Returns the MW added to the installation queue this tick.
+        asyncio.gather; the rest use the deterministic two-stage adoption formula.
+        Returns (total new demand MW, domestic-module demand MW, foreign-module
+        demand MW) added to the installation queue this tick.
         """
         new_demand_mw = 0.0
+        demand_domestic_mw = 0.0
+        demand_foreign_mw = 0.0
         neighbour_ratios = self._compute_neighbour_ratios()
         market_maturity = sum(1 for a in self.adopters if a.is_adopted) / max(
             1, len(self.adopters)
         )
 
-        # Split undecided adopters into LLM and TPB batches
+        # Split undecided adopters into LLM and formula batches
         undecided = [a for a in self.adopters if not a.is_adopted]
         llm_ids: set = set()
 
@@ -286,20 +303,18 @@ class SolarModel:
             # --- LLM batch (async) ---
             llm_tasks = []
             for adopter in llm_batch:
-                effective_price = (
-                    module_price_foreign
-                    if adopter.discount_foreign_pv > 0.02
-                    else module_price_domestic
-                )
                 nb_ratio = neighbour_ratios.get(adopter.agent_id, 0.0)
                 llm_tasks.append(
                     adopter.step_llm(
                         electricity_price=electricity_price,
                         fit_tariff=fit_tariff,
-                        module_price=effective_price,
+                        module_price_domestic=module_price_domestic,
+                        module_price_foreign=module_price_foreign,
                         bos_cost=bos_cost_domestic,
                         neighbour_ratio=nb_ratio,
                         market_maturity=market_maturity,
+                        information=information,
+                        irr=irr,
                         model_name=self.llm_model,
                     )
                 )
@@ -309,47 +324,53 @@ class SolarModel:
                 adopter.apply_llm_decision(decision)
                 if decision.will_adopt:
                     new_demand_mw += adopter.system_size / 1000
+                    # LLM path does not select a module; default to domestic.
+                    demand_domestic_mw += adopter.system_size / 1000
 
-        # --- TPB batch (sync, fast) ---
+        # --- Formula batch (sync, fast) ---
         for adopter in undecided:
             if adopter.agent_id in llm_ids:
                 continue  # already processed via LLM
 
-            effective_price = (
-                module_price_foreign
-                if adopter.discount_foreign_pv > 0.02
-                else module_price_domestic
-            )
             nb_ratio = neighbour_ratios.get(adopter.agent_id, 0.0)
 
-            npv = compute_npv(
+            outcome = evaluate_adoption(
+                is_residential=adopter.adopter_type == AdopterType.RESIDENTIAL,
+                environmental_awareness=adopter.environmental_awareness,
+                peer_effect=nb_ratio,
+                information=information,
+                irr=irr,
                 system_size_kw=adopter.system_size,
-                module_price_per_w=effective_price,
-                bos_cost_per_w=bos_cost_domestic,
+                self_consumption_rate=adopter.self_consumption_rate,
                 electricity_price=adopter.electricity_price,
                 fit_tariff=fit_tariff,
-                self_consumption_rate=adopter.self_consumption_rate,
-                discount_rate=adopter.discount_rate + adopter.personal_discount_rate,
+                module_price_domestic=module_price_domestic,
+                module_price_foreign=module_price_foreign,
+                bos_cost=bos_cost_domestic,
+                category_discount_rate=adopter.discount_rate,
+                personal_discount_rate=adopter.personal_discount_rate,
+                production_factor=adopter.pv_orientation,
+                irradiation=adopter.irradiation,
             )
 
-            intention = compute_tpb_intention(
-                environmental_awareness=adopter.environmental_awareness,
-                npv=npv,
-                neighbour_adoption_ratio=nb_ratio,
-                market_maturity=market_maturity,
-            )
-
-            adopter.attitude = intention
+            adopter.ideation = outcome.ideation
+            adopter.npv_domestic = outcome.npv_domestic
+            adopter.npv_foreign = outcome.npv_foreign
+            adopter.module_choice = outcome.module_choice
+            adopter.attitude = outcome.ideation
             adopter.social_norm = nb_ratio
             adopter.pbc = market_maturity
-            adopter.intention = intention
+            adopter.intention = outcome.ideation
 
-            # Deterministic threshold adoption (heterogeneous per agent)
-            if intention > adopter.personal_threshold:
+            if outcome.will_adopt:
                 adopter.is_adopted = True
                 new_demand_mw += adopter.system_size / 1000
+                if outcome.module_choice == "foreign":
+                    demand_foreign_mw += adopter.system_size / 1000
+                else:
+                    demand_domestic_mw += adopter.system_size / 1000
 
-        return new_demand_mw
+        return new_demand_mw, demand_domestic_mw, demand_foreign_mw
 
     def _compute_neighbour_ratios(self, radius_km: float = 10.0) -> Dict[int, float]:
         """Compute fraction of adopted neighbours within `radius_km` for each adopter."""
@@ -406,7 +427,7 @@ class SolarModel:
             cumulative_installations=dom.cumulative_installations,
             ci_initial=dom.ci_initial,
             intercept=dom.experience_curve_intercept_non_module,
-            learning_rate=dom.learning_by_doing_rate_non_module,
+            beta=dom.beta_learning_by_doing_non_module,
         )
         dom.employees = adjust_workforce(
             employees=dom.employees,
@@ -424,7 +445,7 @@ class SolarModel:
             cumulative_installations=for_.cumulative_installations,
             ci_initial=for_.ci_initial,
             intercept=for_.experience_curve_intercept_non_module,
-            learning_rate=for_.learning_by_doing_rate_non_module,
+            beta=for_.beta_learning_by_doing_non_module,
         )
 
         total_fulfilled = dom_fulfilled + for_fulfilled
@@ -507,23 +528,34 @@ class SolarModel:
         tech_push = mv["tech_push_level"]
         global_cum_mw = mv.get("global_cumulative_mw", 500.0)
 
-        # 1b. Media → environmental awareness diffusion
-        for adopter in self.adopters:
-            adopter.update_awareness(media_coverage=media)
-
-        # 2. Adopter decisions (async — LLM batch + TPB) ─────────────
+        # 2. Adopter decisions (async — LLM batch + formula) ─────────
         dom_mfg = self.manufacturers["domestic"]
         for_mfg = self.manufacturers["foreign"]
         dom_inst = self.installers["domestic"]
 
-        new_demand_mw = await self._step_adopters(
+        # Available information IN_t (world cumulative deployment) and the
+        # average-household IRR used as economic attractiveness in ideation.
+        information = information_index(global_cum_mw)
+        irr = compute_irr(
+            system_price_per_w=dom_mfg.price + dom_inst.bos_cost,
+            electricity_price=electricity_price,
+            fit_tariff=fit_tariff,
+        )
+
+        new_demand_mw, demand_domestic_mw, demand_foreign_mw = await self._step_adopters(
             electricity_price=electricity_price,
             fit_tariff=fit_tariff,
             module_price_domestic=dom_mfg.price,
             module_price_foreign=for_mfg.price,
             bos_cost_domestic=dom_inst.bos_cost,
+            information=information,
+            irr=irr,
         )
         self.pending_installation_mw += new_demand_mw
+
+        # Track manufacturer module sales (MW) from adopter module choice.
+        self.manufacturers["domestic"].sales = demand_domestic_mw
+        self.manufacturers["foreign"].sales = demand_foreign_mw
 
         # 3. Installer response (sync) — draws from installation queue ─
         order_backlog = self._step_installers()
@@ -545,6 +577,8 @@ class SolarModel:
             "electricity_price": round(electricity_price, 4),
             "fit_tariff": round(fit_tariff, 4),
             "media_coverage": round(media, 4),
+            "information": round(information, 4),
+            "irr": round(irr, 4),
             "tech_push": tech_push,
             "new_demand_mw": round(new_demand_mw, 4),
             "pending_installation_mw": round(self.pending_installation_mw, 4),

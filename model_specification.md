@@ -82,7 +82,7 @@ $$I = w_{att} \cdot A + w_{sn} \cdot SN + w_{pbc} \cdot PBC$$
 投资态度结合了环境意识与经济驱动：
 $$A = w_{env} \cdot \text{Env} + w_{eco} \cdot \text{Eco}$$
 
-* **极高环境意识跳过机制**：若 $\text{Env} > \Theta_{env}$（阈值为 0.88），主体直接令 $A = 1.0$，跳过复杂的经济效益（NPV）评估。
+* **极高环境意识跳过机制**：若 $\text{Env} > \Theta_{env}$（阈值为 0.92，论文 Table SI 标定值，范围 [0.88, 1]），主体直接令 $A = 1.0$，跳过复杂的经济效益（NPV）评估。
 * **经济态度效益评价 ($\text{Eco}$)**：由归一化后的净现值（NPV）决定：
     $$\text{Eco} = \frac{1}{1 + e^{-\gamma \cdot NPV_{norm}}}$$
 
@@ -100,18 +100,24 @@ $$SN = \frac{\text{Radius内已安装光伏的主体数量}}{\text{Radius内所�
 ---
 
 ### 3.2 制造端组件成本技术学习曲线（双因子经验曲线）
-光伏组件成本的下降由全球累计生产经验（干中学）和研发知识存量（研究中学）双驱动。本土和海外制造商制造组件的底线成本 $MC_t$ 计算如下：
-$$MC_t = MC_0 \cdot \left( \frac{CP_t}{CP_0} \right)^{-b} \cdot \left( \frac{KS_t}{KS_0} \right)^{-c}$$
+光伏组件成本的下降由全球累计生产经验（干中学）和研发知识存量（研究中学）双驱动。本土和海外制造商制造组件的底线成本 $MC_t$ 计算如下（论文 Equation 24，Table SI 53 标定）：
+$$MC_t = \alpha \cdot \left( \frac{CP_t}{CP_0} \right)^{\beta_{LBD}} \cdot \left( \frac{KS_t}{KS_0} \right)^{\beta_{LBR}}$$
 
 * $CP_t$: 当期累积产量（Cumulative Production）。
 * $KS_t$: 当期研发知识存量（Knowledge Stock）。
-* $b$: 学习演化指数（Learning-by-doing index），对应**产量每翻一番，成本下降约 18% - 20%**。
-* $c$: 研究演化指数（Learning-by-searching index），对应研发资金转化为技术积淀的效率。
+* $\alpha$: 截距（成本 €/W），国内 2.882、国外 2.448、非组件 3.354。
+* $\beta_{LBD}$: 干中学 log-log 斜率，国内 −0.074、国外 −0.448（对应学习率 5.0% / 26.7%）。
+* $\beta_{LBR}$: 研究中学 log-log 斜率，国内 −0.814、国外 −0.074（对应学习率 43.1% / 5.0%）。
+
+学习率 $LR$（成本随驱动变量每翻一番下降的比例）与斜率 $\beta$ 的换算：
+$$\beta = \log_2(1 - LR) = \frac{\ln(1 - LR)}{\ln 2}$$
+
+非组件（BOS）单因子经验曲线（Equation 22）：$\alpha_I = 3.354$、$\beta_I = -0.155$（学习率 10.2%）。
 
 研发知识存量 $KS_t$ 的永续盘存动态更新公式：
 $$KS_t = (1 - \delta) \cdot KS_{t-1} + R\&D_t$$
-* $\delta$: 知识折旧率（通常设定为每年 10% 左右）。
-* $R\&D_t$: 当期政府技术推动政策（Technology-push）注入的研发资金。
+* $\delta$: 知识折旧率（0.8742%/月，≈ 10%/年，Table SI 53）。
+* $R\&D_t$: 当期研发资金（政府 GERD + 企业 BERD，含知识溢出）。
 
 ---
 
@@ -126,3 +132,63 @@ $$\Delta \text{Employees} = \alpha \cdot \left( \frac{\text{order-backlog}}{\tex
 #### 3.3.2 渠道成本动态报价
 $$BOS_t = BOS_{base} \cdot \left( 1 + \beta \cdot \frac{\text{order-backlog}}{\text{Employees}_t} \right)$$
 * 当订单激增、人手不足时，安装商会提高非组件溢价（$BOS_t$ 上升），形成市场降温的负反馈调节。
+
+---
+
+## 附录 A（2026-08-13 从论文 DOCX 补充材料提取）：采用决策的真实两阶段模型
+
+> 本节纠正上文 §3.1 的简化版 TPB。论文实际的采用决策是**两阶段**过程，
+> 上文把两个阶段合并成了单一 TPB 公式，与原文不符。以下内容从
+> `1-s2.0-S0048733322001093-mmc1.docx` 的 OMML 公式与 Table 33/36/38/53 提取。
+
+### 阶段一：萌生念头（Ideation，Equation 2）
+
+主体在当月"萌生安装念头"当且仅当四个变量的加权和超过固定阈值 **0.5**：
+
+$$k_{peers}\cdot PE_{i,t} + k_{info}\cdot IN_t + k_{awareness}\cdot AW_i + k_{attractive}\cdot IRR_t > 0.5$$
+
+其中：
+* $PE_{i,t}$：peer effects = 1 km 内已装邻居比例（Table 5：半径 **1 km**）
+* $IN_t$：available information = 当月 PV 新闻/媒体信息量（随 PV 扩散变化）
+* $AW_i$：environmental awareness = $N(0.5, 0.2)$，赋值后**恒定不变**
+* $IRR_t$：economic attractiveness = 德国平均家庭 PV 投资的内部收益率
+
+权重（Table 36 标定，3 个标定 + 第 4 个线性依赖，和 = 1）：
+$$k_{awareness},\ k_{info},\ k_{attractive},\ k_{peers} = 0.52,\ 0.17,\ 0.12,\ 0.19$$
+映射已确认：校准参数清单（OMML）列出 k_awareness、k_info、k_attractive 三个标定权重，
+k_peers 为线性依赖项；正文敏感度分析明确"information weight = 0.17"。故
+awareness=0.52、info=0.17、attractive=0.12、peers=0.19（peers = 1 − 0.52 − 0.17 − 0.12）。
+
+### 阶段二：经济与环境意识评估（NPV 双选，Equations 3-5）
+
+只有"萌生念头"的主体进入此阶段：
+* **早期采用者**（$AW > \Theta_{env} = 0.92$ 且 residential）→ 直接安装
+* 其余：分别计算 domestic / foreign 两个 NPV，选**非负且最大**者（平局偏好 domestic）
+
+NPV（$y = 0..20$ 年，FiT 合同 20 年）：
+$$NPV^d_{i,t} = -I^d_{i,t} + \sum_{y=0}^{20}\frac{AC_{i,t} - O\&M^d_{i,t} + FITR_{i,t}}{(1+r_t+D_i)^y} \ge 0$$
+$$NPV^f_{i,t} = -I^f_{i,t} + \sum_{y=0}^{20}\frac{AC_{i,t} - O\&M^f_{i,t} + FITR_{i,t}}{(1+r_t+D_i+D^f_i)^y} \ge 0$$
+$$D^f_i = D_i + R^f$$
+
+关键子公式（Equations 6-10）：
+* 投资 $I = S_i \cdot P_t \cdot SE_i$（系统大小 × 系统价格 × 规模效应）
+* 规模效应 $SE_i = 1.1246 \cdot S_i^{-0.051}$（$S_i \ge 1$ kWp）；否则 $SE_i = 1.2$
+* 自发自用省费 $AC_{i,t} = SC_i \cdot EG_i \cdot EP_{i,t}$
+* 余电上网收入 $FITR_{i,t} = (1-SC_i) \cdot EG_i \cdot FIT_t$
+* 发电量 $EG_i = SUN_i \cdot S_i \cdot PR \cdot PF_i$（$PR = 0.85$，$PF \sim N(0.9, 0.2)$）
+
+### 与当前代码的差异（采用子模型已重写为两阶段，2026-08-13）
+
+| 项目 | 论文 | 当前代码 |
+|------|------|----------|
+| 决策结构 | 两阶段（ideation 阈值 0.5 → NPV 双选） | ✅ 两阶段（submodels/adoption.py） |
+| 邻居半径 | 1 km | 10 km（500 主体缩比的补偿，刻意偏离） |
+| 环境意识 | 恒定 N(0.5,0.2) | ✅ 恒定（不再随媒体演化） |
+| 早期采用者 | env>0.92 且 residential | ✅ env>0.92 且 residential（自然涌现，无种子 hack） |
+| 经济评估 | IRR（ideation）+ NPV 双选（阶段二） | ✅ IRR（代表家庭）+ NPV 双选 |
+| 环境意识阈值 | 0.92 | ✅ 0.92 |
+
+> 说明：采用子模型已按论文两阶段重写。剩余主要偏离为邻居半径（1 km→10 km，
+> 因 500 主体在 100×100 km 网格中 1 km 内平均仅 0.16 邻居，peer 效应无法启动）；
+> 以及 IRR 用固定代表家庭（4 kWp、30% 自用）近似论文"平均德国家庭"。信息量 IN_t
+> 采用 Table SI 15 的 logistic 拟合（新文章数 vs 世界累计装机），环境意识恒定。

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="ending"
+     font-family="Microsoft YaHei, Segoe UI, system-ui, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#F7F5F0"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#C0562B"/>
+    <text x="72" y="96" font-size="18" fill="#16233A" fill-opacity="0.78">PART 5 · 偏差、进度与下一步</text>
+    <text x="72" y="142" font-size="42" font-weight="700" fill="#16233A">下一步三个候选，建议先做校准</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="next-calibrate" data-pptx-bounds="72 230 352 300">
+    <text x="72" y="286" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#C0562B">A</text>
+    <text x="72" y="330" font-size="24" font-weight="700" fill="#16233A">模型校准（建议优先）</text>
+    <text x="72" y="376" font-size="18" fill="#35322C"><tspan x="72" dy="0">修正全球装机量级与国外</tspan><tspan x="72" dy="28">学习驱动量；逐图逐表对比</tspan><tspan x="72" dy="28">论文输出；把采用率拉回 ~7%。</tspan></text>
+    <line x1="72" y1="470" x2="424" y2="470" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+    <text x="72" y="500" font-size="16" fill="#C0562B">代价低 · 直接决定现有结论可信度</text>
+  </g>
+
+  <g id="next-scale" data-pptx-bounds="464 230 352 300">
+    <text x="464" y="286" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#C0562B">B</text>
+    <text x="464" y="330" font-size="24" font-weight="700" fill="#16233A">扩大主体规模</text>
+    <text x="464" y="376" font-size="18" fill="#35322C"><tspan x="464" dy="0">为邻居计算接入空间索引，</tspan><tspan x="464" dy="28">主体从 500 扩到 2 万，</tspan><tspan x="464" dy="28">邻居半径改回 1 km。</tspan></text>
+    <line x1="464" y1="470" x2="816" y2="470" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+    <text x="464" y="500" font-size="16" fill="#35322C">代价中等 · 消除缩比假象，需重新标定</text>
+  </g>
+
+  <g id="next-framework" data-pptx-bounds="856 230 352 300">
+    <text x="856" y="286" font-family="Consolas, Microsoft YaHei, monospace" font-size="42" font-weight="700" fill="#2E6F6A">C</text>
+    <text x="856" y="330" font-size="24" font-weight="700" fill="#16233A">接入成熟 Agent 框架</text>
+    <text x="856" y="376" font-size="18" fill="#35322C"><tspan x="856" dy="0">引入 LangChain / AutoGen，</tspan><tspan x="856" dy="28">做多步推理与更复杂的</tspan><tspan x="856" dy="28">角色协作。</tspan></text>
+    <line x1="856" y1="470" x2="1208" y2="470" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+    <text x="856" y="500" font-size="16" fill="#35322C">代价高 · 收益偏探索性</text>
+  </g>
+
+  <g id="closing-statement" data-pptx-bounds="72 552 1136 90">
+    <rect x="72" y="562" width="120" height="4" fill="#C0562B"/>
+    <text x="72" y="626" font-size="32" fill="#16233A">先让数字可信，再让规模可信，最后才谈能力上限。</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#16233A" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="16" fill="#35322C" fill-opacity="0.72">建议顺序：A → B → C，本次汇报希望就优先级达成一致</text>
+    <text x="1208" y="690" font-size="16" fill="#35322C" fill-opacity="0.72" text-anchor="end">14 / 14</text>
+  </g>
+
+</svg>

@@ -16,6 +16,72 @@ from openai import AsyncOpenAI
 
 
 # ---------------------------------------------------------------------------
+# Response parsing helpers
+# ---------------------------------------------------------------------------
+
+
+def extract_json_object(text: str) -> dict:
+    """Extract a JSON object from an LLM response.
+
+    LLM providers (notably DeepSeek) may wrap the requested JSON in prose
+    and/or Markdown code fences (```` ```json ... ``` ````).  ``model_validate_json``
+    then fails because the whole string is not valid JSON.  This locates the
+    first ``{`` and the matching last ``}`` and parses that slice.
+    """
+    if not text or not text.strip():
+        raise ValueError("LLM returned empty content")
+
+    stripped = text.strip()
+
+    # Strip Markdown code fences if present.
+    fence = "```"
+    if stripped.startswith(fence):
+        first_nl = stripped.find("\n")
+        stripped = stripped[first_nl + 1:] if first_nl != -1 else ""
+    if stripped.rstrip().endswith(fence):
+        stripped = stripped.rstrip()
+        stripped = stripped[:stripped.rfind(fence)].rstrip()
+
+    start = stripped.find("{")
+    end = stripped.rfind("}")
+    if start == -1 or end == -1 or end < start:
+        raise ValueError(f"No JSON object in response: {text[:200]!r}")
+
+    return json.loads(stripped[start:end + 1])
+
+
+# ---------------------------------------------------------------------------
+# LLM provider configuration
+# ---------------------------------------------------------------------------
+
+
+def get_llm_model() -> str:
+    """Active LLM model name for the configured provider.
+
+    DeepSeek (deepseek-chat) is used when DEEPSEEK_API_KEY is set; otherwise
+    the OpenAI model name is used.
+    """
+    if os.environ.get("DEEPSEEK_API_KEY"):
+        return os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
+    return os.environ.get("OPENAI_MODEL", "gpt-4.1-mini")
+
+
+def create_llm_client() -> AsyncOpenAI:
+    """Build an AsyncOpenAI client for the active LLM provider.
+
+    Prefers DeepSeek (reachable from the current network, unlike the blocked
+    api.openai.com) when DEEPSEEK_API_KEY is set; otherwise falls back to OpenAI.
+    """
+    deepseek_key = os.environ.get("DEEPSEEK_API_KEY")
+    if deepseek_key:
+        return AsyncOpenAI(
+            api_key=deepseek_key,
+            base_url=os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
+        )
+    return AsyncOpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-placeholder"))
+
+
+# ---------------------------------------------------------------------------
 # Conversation Memory
 # ---------------------------------------------------------------------------
 
@@ -155,9 +221,7 @@ class BaseLLMAgent:
 
     def _get_client(self) -> AsyncOpenAI:
         if self._llm_client is None:
-            self._llm_client = AsyncOpenAI(
-                api_key=os.environ.get("OPENAI_API_KEY", "sk-placeholder"),
-            )
+            self._llm_client = create_llm_client()
         return self._llm_client
 
     # ------------------------------------------------------------------
@@ -202,7 +266,7 @@ class BaseLLMAgent:
                 response_format={"type": "json_object"},
             )
             raw = response.choices[0].message.content
-            return schema_class.model_validate_json(raw)
+            return schema_class.model_validate(extract_json_object(raw))
 
         except Exception:
             return self._fallback(user_prompt, tick)
@@ -238,7 +302,7 @@ class BaseLLMAgent:
                     })
             elif msg.content:
                 try:
-                    return schema_class.model_validate_json(msg.content)
+                    return schema_class.model_validate(extract_json_object(msg.content))
                 except Exception:
                     messages.append({
                         "role": "user",

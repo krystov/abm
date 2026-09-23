@@ -60,7 +60,7 @@ def compute_tpb_intention(
     w_pbc: float = 0.15,
     w_env: float = 0.4,
     w_eco: float = 0.6,
-    env_threshold: float = 0.88,
+    env_threshold: float = 0.92,
     gamma: float = 5.0,
 ) -> float:
     """Compute adoption intention I via TPB.

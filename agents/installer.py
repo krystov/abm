@@ -24,7 +24,7 @@ class Installer:
         min/max workforce constraints, past_months_demand
 
     Table SI 5 row 1 & 4 — Non-module experience curve:
-        learning_by_doing_rate_non_module, experience_curve_intercept_non_module
+        beta_learning_by_doing_non_module, experience_curve_intercept_non_module
     """
 
     installer_id: int
@@ -45,6 +45,6 @@ class Installer:
     mark_up: float = 0.0
     cumulative_installations: float = 0.0
     experience_curve_intercept_non_module: float = 3.354
-    learning_by_doing_rate_non_module: float = 0.102
+    beta_learning_by_doing_non_module: float = -0.155
     past_months_demand: int = 6
     ci_initial: float = 1.0

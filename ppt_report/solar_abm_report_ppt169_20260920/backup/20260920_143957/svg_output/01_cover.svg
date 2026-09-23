@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="cover"
+     font-family="Microsoft YaHei, Segoe UI, system-ui, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#F7F5F0"/>
+
+  <g id="cover-heading" data-pptx-bounds="72 110 640 430">
+    <rect id="motif-bar" x="72" y="118" width="56" height="4" fill="#C0562B"/>
+    <text x="72" y="164" font-size="18" fill="#16233A" fill-opacity="0.78">进度汇报 · 2026 年 9 月</text>
+    <text x="72" y="256" font-size="44" font-weight="700" fill="#16233A"><tspan x="72" dy="0">德国光伏政策组合 ABM</tspan><tspan x="72" dy="62" fill="#C0562B">复现与 LLM 增强</tspan></text>
+    <text x="72" y="416" font-size="32" fill="#35322C"><tspan x="72" dy="0">复现 Nuñez-Jimenez et al. (2022)</tspan><tspan x="72" dy="46">德国 1991–2016 光伏政策组合模型，</tspan><tspan x="72" dy="46">并让制造商与采用者的决策接入 LLM</tspan></text>
+  </g>
+
+  <g id="cover-metrics" data-pptx-bounds="740 110 468 470">
+    <text x="740" y="200" font-family="Consolas, Microsoft YaHei, monospace" font-size="64" font-weight="700" fill="#16233A">50/500</text>
+    <text x="740" y="232" font-size="18" fill="#35322C">累计采用户数（10%，真实约 7%）</text>
+    <line x1="740" y1="266" x2="1208" y2="266" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+    <text x="740" y="336" font-family="Consolas, Microsoft YaHei, monospace" font-size="64" font-weight="700" fill="#16233A">0.6 MW</text>
+    <text x="740" y="368" font-size="18" fill="#35322C">累计装机（1:1000 缩比下的量级）</text>
+    <line x1="740" y1="402" x2="1208" y2="402" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+    <text x="740" y="472" font-family="Consolas, Microsoft YaHei, monospace" font-size="64" font-weight="700" fill="#C0562B">−85.9%</text>
+    <text x="740" y="504" font-size="18" fill="#35322C">国内组件成本降幅（2.833 → 0.399 €/W）</text>
+  </g>
+
+  <g id="cover-footer" data-pptx-bounds="72 616 1136 64">
+    <line x1="72" y1="624" x2="1208" y2="624" stroke="#16233A" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="662" font-size="16" fill="#35322C" fill-opacity="0.72">仓库 solar-abm-replication · 公式模式 312 tick · seed=42 · 合成数据</text>
+    <text x="1208" y="662" font-size="16" fill="#35322C" fill-opacity="0.72" text-anchor="end">01 / 14</text>
+  </g>
+
+</svg>

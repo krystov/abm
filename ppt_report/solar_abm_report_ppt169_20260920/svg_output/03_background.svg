@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="content"
+     font-family="Microsoft YaHei, Segoe UI, system-ui, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#F7F5F0"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 176">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#C0562B"/>
+    <text x="72" y="96" font-size="18" fill="#16233A" fill-opacity="0.78">PART 1 · 项目与系统</text>
+    <text x="72" y="142" font-size="42" font-weight="700" fill="#16233A"><tspan x="72" dy="0">论文问的是政策组合如何推动扩散，</tspan><tspan x="72" dy="54">我们做的是复现，再加一层 LLM</tspan></text>
+  </g>
+
+  <g id="context-statement" data-pptx-bounds="72 236 1136 104">
+    <rect x="72" y="244" width="4" height="70" fill="#C0562B"/>
+    <text x="104" y="268" font-size="24" fill="#16233A"><tspan x="104" dy="0">研究对象：技术推动（政府研发投入）与需求拉动（上网电价 FiT）</tspan><tspan x="104" dy="34">如何共同塑造德国光伏 1991–2016 的扩散轨迹。</tspan></text>
+  </g>
+
+  <g id="track-replication" data-pptx-bounds="72 372 552 268">
+    <use data-icon="tabler-outline/sun" x="72" y="378" width="32" height="32" fill="#C0562B" stroke-width="2"/>
+    <text x="120" y="404" font-size="32" fill="#16233A">主线一 · 模型复现</text>
+    <text x="72" y="458" font-size="24" fill="#35322C">复现论文补充材料中的完整 ABM</text>
+    <text x="72" y="500" font-size="24" fill="#35322C">三类主体 + 宏观观察者，312 个月</text>
+    <text x="72" y="542" font-size="24" fill="#35322C">三份 SI 参数表逐项对齐</text>
+    <text x="72" y="606" font-family="Consolas, Microsoft YaHei, monospace" font-size="32" font-weight="700" fill="#C0562B">≈ 95%</text>
+    <text x="212" y="606" font-size="18" fill="#35322C" fill-opacity="0.85">当前完成度</text>
+  </g>
+
+  <line id="track-divider" data-pptx-role="decoration" x1="680" y1="386" x2="680" y2="624" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+
+  <g id="track-llm" data-pptx-bounds="728 372 480 268">
+    <use data-icon="tabler-outline/robot" x="728" y="378" width="32" height="32" fill="#2E6F6A" stroke-width="2"/>
+    <text x="776" y="404" font-size="32" fill="#16233A">主线二 · LLM 增强</text>
+    <text x="728" y="458" font-size="24" fill="#35322C">制造商与采用者的决策改由 LLM 完成</text>
+    <text x="728" y="500" font-size="24" fill="#35322C">带对话记忆、工具调用与结构化校验</text>
+    <text x="728" y="542" font-size="24" fill="#35322C">任何失败自动回退公式，模型不停摆</text>
+    <text x="728" y="606" font-family="Consolas, Microsoft YaHei, monospace" font-size="32" font-weight="700" fill="#2E6F6A">≈ 75%</text>
+    <text x="868" y="606" font-size="18" fill="#35322C" fill-opacity="0.85">当前完成度</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#16233A" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="16" fill="#35322C" fill-opacity="0.72">来源：论文补充材料（Supplementary Information）与仓库 README／系统说明</text>
+    <text x="1208" y="690" font-size="16" fill="#35322C" fill-opacity="0.72" text-anchor="end">03 / 14</text>
+  </g>
+
+</svg>

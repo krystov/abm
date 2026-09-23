@@ -8,17 +8,20 @@ deterministic TPB fallback.
 
 import asyncio
 import json
-import os
 import random
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional, Tuple
 
 from openai import AsyncOpenAI
-from agents.agent_framework import ConversationMemory
+from agents.agent_framework import (
+    ConversationMemory,
+    create_llm_client,
+    extract_json_object,
+)
 from agents.tools import build_adopter_tools
 from schemas import AdopterDecision
-from submodels.tpb import compute_npv, compute_tpb_intention
+from submodels.adoption import AdoptionEvaluation, evaluate_adoption
 
 
 # ---------------------------------------------------------------------------
@@ -78,6 +81,7 @@ class Adopter:
     adopter_type: AdopterType
     location: Tuple[float, float]
     is_adopted: bool = False
+    roof_size: float = 0.0  # usable roof area [m²] (Table SI 1) — bounds system size
     system_size: float = 0.0
     self_consumption_rate: float = 0.0
     electricity_price: float = 0.0
@@ -93,6 +97,10 @@ class Adopter:
     social_norm: float = 0.0
     pbc: float = 0.0
     intention: float = 0.0
+    ideation: float = 0.0
+    npv_domestic: float = 0.0
+    npv_foreign: float = 0.0
+    module_choice: Optional[str] = None
     scale_effect: float = 1.0
     peer_radius_km: float = 1.0
     personal_threshold: float = 0.45  # innovator→laggard: ~0.30 → ~0.65
@@ -108,19 +116,24 @@ class Adopter:
         self,
         electricity_price: float,
         fit_tariff: float,
-        module_price: float,
+        module_price_domestic: float,
+        module_price_foreign: float,
         bos_cost: float,
         neighbour_ratio: float,
         market_maturity: float,
+        information: float,
+        irr: float,
         model_name: str = "gpt-4.1-mini",
     ) -> AdopterDecision:
         """Query an LLM for the adopter's monthly adoption decision.
 
-        On failure the TPB formula is used as a deterministic fallback.
+        On failure the two-stage adoption formula is used as a deterministic
+        fallback.
         """
         prompt = self._build_llm_prompt(
-            electricity_price, fit_tariff, module_price, bos_cost,
-            neighbour_ratio, market_maturity,
+            electricity_price, fit_tariff, module_price_domestic,
+            module_price_foreign, bos_cost, neighbour_ratio, market_maturity,
+            information, irr,
         )
 
         # Inject conversation memory for multi-turn context
@@ -131,8 +144,8 @@ class Adopter:
         tools = build_adopter_tools(
             electricity_price=electricity_price,
             fit_tariff=fit_tariff,
-            module_price_domestic=module_price,
-            module_price_foreign=module_price,
+            module_price_domestic=module_price_domestic,
+            module_price_foreign=module_price_foreign,
             bos_cost=bos_cost,
             market_maturity=market_maturity,
             neighbour_ratio=neighbour_ratio,
@@ -153,9 +166,7 @@ class Adopter:
 
         try:
             if self._llm_client is None:
-                self._llm_client = AsyncOpenAI(
-                    api_key=os.environ.get("OPENAI_API_KEY", "sk-placeholder"),
-                )
+                self._llm_client = create_llm_client()
 
             messages = [
                 {"role": "system", "content": system_msg},
@@ -186,8 +197,10 @@ class Adopter:
                             "content": result,
                         })
                 elif msg.content:
-                    # Parse JSON from content
-                    decision = AdopterDecision.model_validate_json(msg.content)
+                    # Parse JSON from content (strip prose / code fences).
+                    decision = AdopterDecision.model_validate(
+                        extract_json_object(msg.content)
+                    )
                     self.memory.record(0, decision, "LLM decision (with tools)")
                     return decision
                 else:
@@ -195,32 +208,37 @@ class Adopter:
 
             raise ValueError("Tool loop exceeded without valid decision")
 
-        except Exception:
-            fallback = self._tpb_fallback(
-                electricity_price, fit_tariff, module_price, bos_cost,
-                neighbour_ratio, market_maturity,
+        except Exception as exc:
+            print(f"[adopter:{self.agent_id}] step_llm error: {type(exc).__name__}: {exc}")
+            fallback = self._formula_fallback(
+                electricity_price, fit_tariff, module_price_domestic,
+                module_price_foreign, bos_cost, neighbour_ratio, information, irr,
             )
-            self.memory.record(0, fallback, "TPB fallback (LLM unavailable)")
+            self.memory.record(0, fallback, "two-stage fallback (LLM unavailable)")
             return fallback
 
     def _build_llm_prompt(
         self,
         electricity_price: float,
         fit_tariff: float,
-        module_price: float,
+        module_price_domestic: float,
+        module_price_foreign: float,
         bos_cost: float,
         neighbour_ratio: float,
         market_maturity: float,
+        information: float,
+        irr: float,
     ) -> str:
         type_label = self.adopter_type.value.replace("_", " ").title()
-        total_cost_per_w = module_price + bos_cost
-        system_cost = total_cost_per_w * max(self.system_size, 0.01) * 1000
+        sys_cost_dom = (module_price_domestic + bos_cost) * max(self.system_size, 0.01) * 1000
+        sys_cost_for = (module_price_foreign + bos_cost) * max(self.system_size, 0.01) * 1000
 
         return (
             f"You are a {type_label} PV adopter in Germany.\n\n"
             f"=== Your Profile ===\n"
             f"  System size               : {self.system_size:.1f} kWp\n"
-            f"  Estimated system cost     : €{system_cost:,.0f}\n"
+            f"  Domestic system cost      : €{sys_cost_dom:,.0f}\n"
+            f"  Foreign system cost       : €{sys_cost_for:,.0f}\n"
             f"  Self-consumption rate     : {self.self_consumption_rate:.1%}\n"
             f"  Environmental awareness   : {self.environmental_awareness:.2f} / 1.0\n"
             f"  Discount rate (personal)  : {self.personal_discount_rate:.4f}\n"
@@ -228,57 +246,69 @@ class Adopter:
             f"=== Market Context (this month) ===\n"
             f"  Retail electricity price  : {electricity_price:.4f} €/kWh\n"
             f"  Feed-in tariff (FiT)      : {fit_tariff:.4f} €/kWh\n"
-            f"  Module price              : {module_price:.4f} €/W\n"
+            f"  Domestic module price     : {module_price_domestic:.4f} €/W\n"
+            f"  Foreign module price      : {module_price_foreign:.4f} €/W\n"
             f"  Installation (BOS) cost   : {bos_cost:.4f} €/W\n"
+            f"  Information on PV (IN)    : {information:.2f} / 1.0\n"
+            f"  Avg household IRR         : {irr:.1%}\n"
             f"  Neighbour adoption ratio  : {neighbour_ratio:.1%}\n"
             f"  Overall market maturity   : {market_maturity:.1%}\n\n"
-            f"=== Decision Guidance ===\n"
+            f"=== Decision Guidance (two-stage) ===\n"
+            f"- First, decide whether you 'get the idea' to install PV this month\n"
+            f"  (driven by peer effects, information, awareness, and IRR).\n"
+            f"- If you do, evaluate economics: adopt only if the NPV of a domestic\n"
+            f"  or foreign module system is non-negative; prefer domestic on a tie.\n"
             f"- High FiT + low system cost -> favourable economics.\n"
-            f"- High environmental awareness may override pure economics.\n"
-            f"- Many neighbours already adopted -> social pressure to adopt.\n"
-            f"- If total cost seems reasonable and payback < 15 years, consider adopting.\n"
-            f"- If FiT is zero or very low, adoption only makes sense if you have\n"
-            f"  high environmental awareness or very high self-consumption.\n\n"
+            f"- If FiT is zero or very low, adoption only makes sense with very high\n"
+            f"  environmental awareness or self-consumption.\n\n"
             f"Output a single JSON object per the schema."
         )
 
-    def _tpb_fallback(
+    def _formula_fallback(
         self,
         electricity_price: float,
         fit_tariff: float,
-        module_price: float,
+        module_price_domestic: float,
+        module_price_foreign: float,
         bos_cost: float,
         neighbour_ratio: float,
-        market_maturity: float,
+        information: float,
+        irr: float,
     ) -> AdopterDecision:
-        """Deterministic TPB-based fallback when LLM is unavailable."""
-        npv = compute_npv(
+        """Deterministic two-stage adoption decision when the LLM is unavailable."""
+        is_residential = self.adopter_type == AdopterType.RESIDENTIAL
+        outcome = evaluate_adoption(
+            is_residential=is_residential,
+            environmental_awareness=self.environmental_awareness,
+            peer_effect=neighbour_ratio,
+            information=information,
+            irr=irr,
             system_size_kw=self.system_size,
-            module_price_per_w=module_price,
-            bos_cost_per_w=bos_cost,
+            self_consumption_rate=self.self_consumption_rate,
             electricity_price=electricity_price,
             fit_tariff=fit_tariff,
-            self_consumption_rate=self.self_consumption_rate,
-            discount_rate=self.discount_rate + self.personal_discount_rate,
+            module_price_domestic=module_price_domestic,
+            module_price_foreign=module_price_foreign,
+            bos_cost=bos_cost,
+            category_discount_rate=self.discount_rate,
+            personal_discount_rate=self.personal_discount_rate,
+            production_factor=self.pv_orientation,
+            irradiation=self.irradiation,
         )
 
-        intention = compute_tpb_intention(
-            environmental_awareness=self.environmental_awareness,
-            npv=npv,
-            neighbour_adoption_ratio=neighbour_ratio,
-            market_maturity=market_maturity,
-        )
-
-        # Use agent's personal threshold (heterogeneity: innovator vs laggard)
-        will_adopt = intention > self.personal_threshold
-
-        self.attitude = intention
+        self.ideation = outcome.ideation
+        self.npv_domestic = outcome.npv_domestic
+        self.npv_foreign = outcome.npv_foreign
+        self.module_choice = outcome.module_choice
+        self.attitude = outcome.ideation
         self.social_norm = neighbour_ratio
-        self.pbc = market_maturity
-        self.intention = intention
+        self.pbc = 0.0
+        self.intention = outcome.ideation
 
-        if intention > self.environmental_awareness:
+        if outcome.early_adopter:
             key_factor = "environmental"
+        elif outcome.module_choice == "foreign":
+            key_factor = "economic"
         elif fit_tariff > 0.10:
             key_factor = "policy"
         elif neighbour_ratio > 0.3:
@@ -287,13 +317,14 @@ class Adopter:
             key_factor = "economic"
 
         return AdopterDecision(
-            will_adopt=will_adopt,
-            confidence=round(intention, 4),
+            will_adopt=outcome.will_adopt,
+            confidence=round(outcome.ideation, 4),
             key_factor=key_factor,
             reasoning=(
-                f"TPB fallback: NPV={npv:,.0f}€, intention={intention:.3f}, "
-                f"env_aware={self.environmental_awareness:.2f}, "
-                f"neighbour_ratio={neighbour_ratio:.2f}"
+                f"two-stage: ideation={outcome.ideation:.3f}, "
+                f"idea={outcome.developed_idea}, early={outcome.early_adopter}, "
+                f"module={outcome.module_choice}, "
+                f"NPVd={outcome.npv_domestic:,.0f}€, NPVf={outcome.npv_foreign:,.0f}€"
             ),
         )
 

@@ -1,0 +1,366 @@
+{
+  "schema": "ppt-master.svg-quality-report.v1",
+  "stage": "final",
+  "target": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920",
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "digest": "9346ec1e99ffe29e19f72f2663f8e228be90415affad4db549c90f344ef1ab16",
+    "file_count": 14,
+    "files": [
+      {
+        "file": "01_cover.svg",
+        "sha256": "918e7ededaa7074da4b786e2d02cb62eed6b6a97fd03ce76a4d0db2119a5ba89"
+      },
+      {
+        "file": "02_outline.svg",
+        "sha256": "8c7d2c0bda3d9484e04c7b2d830ef52172ace2401fd2640d70e0d6b69e706693"
+      },
+      {
+        "file": "03_background.svg",
+        "sha256": "e7c09bcc2647ea80e696b6c1fe99bf80e89be4d29c31ab2660a787401f5cdc5c"
+      },
+      {
+        "file": "04_architecture.svg",
+        "sha256": "fdd5f3a96941d93071ee992d94068d6fdeb6b418b73c869de7cf7fc74f4497c3"
+      },
+      {
+        "file": "05_schedule.svg",
+        "sha256": "71f16da8ab8033cf0e343cbd0b3bcfb989e0a7db90a15caa7a36e89a1e0d2d33"
+      },
+      {
+        "file": "06_adoption.svg",
+        "sha256": "10e77373bf08811d562a345883f8717f944cc1d68646c34a03d6aab260cfad40"
+      },
+      {
+        "file": "07_experience_curve.svg",
+        "sha256": "6b9ae108540b032cc5fecd6c53a2e0934ea416578bc333f6c4ae893cb3583581"
+      },
+      {
+        "file": "08_labor_market.svg",
+        "sha256": "4248fdf4dde0ced784715ec83370b697463d822dddec9e0a0b1d8dbafd69b018"
+      },
+      {
+        "file": "09_llm_agents.svg",
+        "sha256": "2d080f4395b697f7efb048ded3d97770819ecacd6526094faa8c6caa43bc8522"
+      },
+      {
+        "file": "10_results.svg",
+        "sha256": "cf193ae3354d7ca16c09b220ba4edcaaf970659cb309c46cb9870a2c31e4fab4"
+      },
+      {
+        "file": "11_key_numbers.svg",
+        "sha256": "2606da7836ebf3cd28725ae9ab2d7836dff583c1d2ce2ed70fb0ea3c0896541d"
+      },
+      {
+        "file": "12_gaps.svg",
+        "sha256": "42f2cd74e1423769b2104b668063b37634404530c9546342a67fff8a7d426070"
+      },
+      {
+        "file": "13_progress.svg",
+        "sha256": "bc73e4e0ae3dc04a3afa7ec7f57a3cfdc04fb5e143bd0a4e9489861ce0757164"
+      },
+      {
+        "file": "14_next_steps.svg",
+        "sha256": "39970a1b9cad54c4300560840b89f641ef59ad1c94eeb6774c2911d9d7a6c413"
+      }
+    ]
+  },
+  "summary": {
+    "total": 14,
+    "passed": 13,
+    "warnings": 1,
+    "errors": 0
+  },
+  "issue_types": {},
+  "categories": {
+    "blocking": {
+      "count": 0,
+      "issues": []
+    },
+    "introduced": {
+      "count": 1,
+      "issues": [
+        {
+          "file": "03_background.svg",
+          "message": "Detected 2 paragraph-like line run(s) split across sibling <text> elements (<g id=\"track-replication\"> x=72.0, y=458.0..542.0, 3 lines; <g id=\"track-llm\"> x=728.0, y=458.0..542.0, 3 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+        }
+      ]
+    },
+    "inherited": {
+      "count": 0,
+      "issues": []
+    },
+    "source-import": {
+      "count": 0,
+      "summary": {
+        "warning_count": 0,
+        "by_code": {}
+      }
+    }
+  },
+  "drift": {
+    "colors": {},
+    "fonts": {},
+    "sizes": {}
+  },
+  "project_issues": {
+    "template": [],
+    "animation": [],
+    "illustration": [],
+    "communication_trace": [],
+    "pptx_structure": []
+  },
+  "files": [
+    {
+      "file": "01_cover.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\01_cover.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 11,
+        "tspan_elements": 5
+      },
+      "passed": true,
+      "source_sha256": "918e7ededaa7074da4b786e2d02cb62eed6b6a97fd03ce76a4d0db2119a5ba89"
+    },
+    {
+      "file": "02_outline.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\02_outline.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 21,
+        "tspan_elements": 3
+      },
+      "passed": true,
+      "source_sha256": "8c7d2c0bda3d9484e04c7b2d830ef52172ace2401fd2640d70e0d6b69e706693"
+    },
+    {
+      "file": "03_background.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\03_background.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [
+        "Detected 2 paragraph-like line run(s) split across sibling <text> elements (<g id=\"track-replication\"> x=72.0, y=458.0..542.0, 3 lines; <g id=\"track-llm\"> x=728.0, y=458.0..542.0, 3 lines). If each run is one prose paragraph, combine it into one <text>: keep its first line as direct text and use direct <tspan> children with the parent x and positive relative dy values for later lines. An all-<tspan> form may start with dy=\"0\". Keep semantically independent text frames separate."
+      ],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 17,
+        "tspan_elements": 4
+      },
+      "passed": true,
+      "source_sha256": "e7c09bcc2647ea80e696b6c1fe99bf80e89be4d29c31ab2660a787401f5cdc5c"
+    },
+    {
+      "file": "04_architecture.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\04_architecture.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 21,
+        "tspan_elements": 11
+      },
+      "passed": true,
+      "source_sha256": "fdd5f3a96941d93071ee992d94068d6fdeb6b418b73c869de7cf7fc74f4497c3"
+    },
+    {
+      "file": "05_schedule.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\05_schedule.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 20,
+        "tspan_elements": 17
+      },
+      "passed": true,
+      "source_sha256": "71f16da8ab8033cf0e343cbd0b3bcfb989e0a7db90a15caa7a36e89a1e0d2d33"
+    },
+    {
+      "file": "06_adoption.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\06_adoption.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 14,
+        "tspan_elements": 4
+      },
+      "passed": true,
+      "source_sha256": "10e77373bf08811d562a345883f8717f944cc1d68646c34a03d6aab260cfad40"
+    },
+    {
+      "file": "07_experience_curve.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\07_experience_curve.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 31,
+        "tspan_elements": 2
+      },
+      "passed": true,
+      "source_sha256": "6b9ae108540b032cc5fecd6c53a2e0934ea416578bc333f6c4ae893cb3583581"
+    },
+    {
+      "file": "08_labor_market.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\08_labor_market.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 22,
+        "tspan_elements": 6
+      },
+      "passed": true,
+      "source_sha256": "4248fdf4dde0ced784715ec83370b697463d822dddec9e0a0b1d8dbafd69b018"
+    },
+    {
+      "file": "09_llm_agents.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\09_llm_agents.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 13,
+        "tspan_elements": 8
+      },
+      "passed": true,
+      "source_sha256": "2d080f4395b697f7efb048ded3d97770819ecacd6526094faa8c6caa43bc8522"
+    },
+    {
+      "file": "10_results.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\10_results.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 18,
+        "tspan_elements": 8
+      },
+      "passed": true,
+      "source_sha256": "cf193ae3354d7ca16c09b220ba4edcaaf970659cb309c46cb9870a2c31e4fab4"
+    },
+    {
+      "file": "11_key_numbers.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\11_key_numbers.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 33,
+        "tspan_elements": 0
+      },
+      "passed": true,
+      "source_sha256": "2606da7836ebf3cd28725ae9ab2d7836dff583c1d2ce2ed70fb0ea3c0896541d"
+    },
+    {
+      "file": "12_gaps.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\12_gaps.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 19,
+        "tspan_elements": 10
+      },
+      "passed": true,
+      "source_sha256": "42f2cd74e1423769b2104b668063b37634404530c9546342a67fff8a7d426070"
+    },
+    {
+      "file": "13_progress.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\13_progress.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 17,
+        "tspan_elements": 6
+      },
+      "passed": true,
+      "source_sha256": "bc73e4e0ae3dc04a3afa7ec7f57a3cfdc04fb5e143bd0a4e9489861ce0757164"
+    },
+    {
+      "file": "14_next_steps.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\solar_abm_report_ppt169_20260920\\svg_output\\14_next_steps.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Microsoft YaHei, monospace",
+          "Microsoft YaHei, Segoe UI, system-ui, sans-serif"
+        ],
+        "text_elements": 17,
+        "tspan_elements": 9
+      },
+      "passed": true,
+      "source_sha256": "39970a1b9cad54c4300560840b89f641ef59ad1c94eeb6774c2911d9d7a6c413"
+    }
+  ]
+}

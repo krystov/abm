@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="content"
+     font-family="Microsoft YaHei, Segoe UI, system-ui, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#F7F5F0"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#C0562B"/>
+    <text x="72" y="96" font-size="18" fill="#16233A" fill-opacity="0.78">PART 2 · 复现的三个核心机制</text>
+    <text x="72" y="142" font-size="42" font-weight="700" fill="#16233A">组件成本由干中学与研究中学共同驱动</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="curve-formula" data-pptx-bounds="72 200 560 350">
+    <use data-icon="tabler-outline/trending-down" x="72" y="206" width="30" height="30" fill="#C0562B" stroke-width="2"/>
+    <text x="116" y="230" font-size="24" font-weight="700" fill="#16233A">双因子经验曲线（Eq. 24）</text>
+    <text x="72" y="302" font-family="Consolas, Microsoft YaHei, monospace" font-size="32" font-weight="700" fill="#16233A">MC = α · (CP / CP₀)^β_LBD</text>
+    <text x="72" y="350" font-family="Consolas, Microsoft YaHei, monospace" font-size="32" font-weight="700" fill="#16233A">        · (KS / KS₀)^β_LBR</text>
+    <text x="72" y="398" font-size="18" fill="#35322C"><tspan x="72" dy="0">α 为截距，β 为 log-log 斜率；</tspan><tspan x="72" dy="28">学习率与斜率换算 β = log₂(1 − LR)。</tspan></text>
+    <polyline points="96,452 220,474 344,494 468,508 548,514" fill="none" stroke="#C0562B" stroke-width="2"/>
+    <text x="96" y="540" font-size="16" fill="#35322C" fill-opacity="0.85">成本随累计产量与知识存量下降（示意）</text>
+  </g>
+
+  <g id="ec-params-table" data-pptx-bounds="664 200 544 350">
+    <text x="664" y="252" font-size="18" font-weight="700" fill="#16233A">参数</text>
+    <text x="900" y="252" font-size="18" font-weight="700" fill="#16233A">国内</text>
+    <text x="1012" y="252" font-size="18" font-weight="700" fill="#16233A">国外</text>
+    <text x="1124" y="252" font-size="18" font-weight="700" fill="#16233A">非组件</text>
+    <line x1="664" y1="266" x2="1208" y2="266" stroke="#16233A" stroke-opacity="0.35" stroke-width="1"/>
+    <text x="664" y="304" font-size="18" fill="#35322C">截距 α（€/W）</text>
+    <text x="900" y="304" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">2.882</text>
+    <text x="1012" y="304" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">2.448</text>
+    <text x="1124" y="304" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">3.354</text>
+    <line x1="664" y1="322" x2="1208" y2="322" stroke="#16233A" stroke-opacity="0.15" stroke-width="1"/>
+    <text x="664" y="360" font-size="18" fill="#35322C">β 干中学</text>
+    <text x="900" y="360" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">−0.074</text>
+    <text x="1012" y="360" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">−0.448</text>
+    <text x="1124" y="360" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">−0.155</text>
+    <line x1="664" y1="378" x2="1208" y2="378" stroke="#16233A" stroke-opacity="0.15" stroke-width="1"/>
+    <text x="664" y="416" font-size="18" fill="#35322C">β 研究中学</text>
+    <text x="900" y="416" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">−0.814</text>
+    <text x="1012" y="416" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">−0.074</text>
+    <text x="1124" y="416" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">—</text>
+    <line x1="664" y1="434" x2="1208" y2="434" stroke="#16233A" stroke-opacity="0.15" stroke-width="1"/>
+    <text x="664" y="472" font-size="18" fill="#35322C">对应学习率</text>
+    <text x="900" y="472" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">5.0%</text>
+    <text x="1012" y="472" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">26.7%</text>
+    <text x="1124" y="472" font-family="Consolas, Microsoft YaHei, monospace" font-size="18" fill="#16233A">10.2%</text>
+    <text x="664" y="512" font-size="16" fill="#35322C" fill-opacity="0.85">研究中学学习率：国内 43.1% / 国外 5.0%</text>
+  </g>
+
+  <g id="ec-knowledge" data-pptx-bounds="72 570 1136 60">
+    <text x="72" y="604" font-size="18" fill="#16233A">知识存量按永续盘存更新：KSₜ = (1 − δ) · KSₜ₋₁ + R&amp;Dₜ，δ ≈ 0.874% / 月（≈ 10% / 年）</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#16233A" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="16" fill="#35322C" fill-opacity="0.72">参数对齐论文 Table SI 53；实现于 submodels/experience_curve.py</text>
+    <text x="1208" y="690" font-size="16" fill="#35322C" fill-opacity="0.72" text-anchor="end">07 / 14</text>
+  </g>
+
+</svg>

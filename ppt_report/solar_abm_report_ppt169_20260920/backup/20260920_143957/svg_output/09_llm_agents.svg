@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="content"
+     font-family="Microsoft YaHei, Segoe UI, system-ui, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#F7F5F0"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#C0562B"/>
+    <text x="72" y="96" font-size="18" fill="#16233A" fill-opacity="0.78">PART 3 · LLM 增强</text>
+    <text x="72" y="142" font-size="42" font-weight="700" fill="#16233A">LLM 只接管两类主体的决策，始终有公式兜底</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#16233A" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="llm-manufacturer" data-pptx-bounds="72 200 552 280">
+    <rect x="72" y="200" width="552" height="272" fill="#FFFFFF" stroke="#D8D2C6" stroke-width="1"/>
+    <use data-icon="tabler-outline/robot" x="104" y="228" width="30" height="30" fill="#C0562B" stroke-width="2"/>
+    <text x="148" y="252" font-size="24" font-weight="700" fill="#16233A">制造商 · 每月 2 次</text>
+    <text x="104" y="304" font-size="18" fill="#35322C"><tspan x="104" dy="0">输出产能动作 expand / maintain / reduce</tspan><tspan x="104" dy="30">给出变动幅度（0–0.5），并选择研发方向：</tspan><tspan x="104" dy="30">效率、降本或无</tspan></text>
+    <text x="104" y="428" font-size="18" fill="#35322C" fill-opacity="0.85">输出经 Pydantic 校验后才允许执行</text>
+  </g>
+
+  <g id="llm-adopter" data-pptx-bounds="704 200 504 280">
+    <rect x="704" y="200" width="504" height="272" fill="#FFFFFF" stroke="#D8D2C6" stroke-width="1"/>
+    <use data-icon="tabler-outline/users" x="736" y="228" width="30" height="30" fill="#2E6F6A" stroke-width="2"/>
+    <text x="780" y="252" font-size="24" font-weight="700" fill="#16233A">采用者 · 每月抽样 5%</text>
+    <text x="736" y="304" font-size="18" fill="#35322C"><tspan x="736" dy="0">从未决策者中随机抽取，评估本月是否安装；</tspan><tspan x="736" dy="30">输出是否安装、置信度与主因</tspan><tspan x="736" dy="30">（经济 / 环保 / 社会 / 政策）。</tspan></text>
+    <text x="736" y="428" font-size="18" fill="#35322C" fill-opacity="0.85">未抽中的主体走两阶段公式，两条路径并存</text>
+  </g>
+
+  <g id="llm-capabilities" data-pptx-bounds="72 500 1136 90">
+    <text x="72" y="526" font-size="18" font-weight="700" fill="#16233A">共同能力</text>
+    <text x="72" y="556" font-size="18" fill="#35322C"><tspan x="72" dy="0">滚动 6 轮对话记忆 · function calling 工具（市场行情 / 邻居采用率 / 静态回收期 / 自身产能与库存）</tspan><tspan x="72" dy="26">asyncio 并发调用 · 最多 3 轮工具循环 · 失败自动回退公式</tspan></text>
+  </g>
+
+  <g id="llm-fallback" data-pptx-bounds="72 600 1136 44">
+    <rect x="72" y="606" width="4" height="32" fill="#2E6F6A"/>
+    <text x="104" y="628" font-size="18" fill="#16233A">回退链：网络错误 / 返回非 JSON / 校验失败 → 制造商退回经验曲线公式，采用者退回两阶段公式</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#16233A" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="16" fill="#35322C" fill-opacity="0.72">提供方：DeepSeek（deepseek-chat，OpenAI 兼容端点）· 实现于 agents/agent_framework.py 与 agents/tools.py</text>
+    <text x="1208" y="690" font-size="16" fill="#35322C" fill-opacity="0.72" text-anchor="end">09 / 14</text>
+  </g>
+
+</svg>

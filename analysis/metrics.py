@@ -31,7 +31,6 @@ def compute_metrics(history: List[dict]) -> Dict:
         "duration_years": len(history) / 12,
         "final_installed_mw": final["total_installed_mw"],
         "final_adopted": final["n_adopted"],
-        "final_adopted": final["n_adopted"],
         "initial_adopted": initial.get("n_adopted", 0),
         "domestic_cost_initial": round(initial["domestic_cost"], 4),
         "domestic_cost_final": round(final["domestic_cost"], 4),
@@ -82,7 +81,6 @@ def _annual_snapshots(history: List[dict]) -> Dict[int, dict]:
 def _annual_additions(history: List[dict]) -> Dict[int, float]:
     """Compute MW added per year."""
     annual = {}
-    prev_mw = 0.0
     current_year = 1991
     year_mw_start = 0.0
     for r in history:

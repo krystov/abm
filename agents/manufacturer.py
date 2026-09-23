@@ -6,13 +6,16 @@ LLM-augmented capacity & R&D decisions with two-factor experience-curve fallback
 """
 
 import json
-import os
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional
 
 from openai import AsyncOpenAI
-from agents.agent_framework import ConversationMemory
+from agents.agent_framework import (
+    ConversationMemory,
+    create_llm_client,
+    extract_json_object,
+)
 from agents.tools import build_manufacturer_tools
 from schemas import ManufacturerDecision
 from submodels.experience_curve import compute_production_cost, update_knowledge_stock
@@ -50,7 +53,7 @@ class Manufacturer:
         rd_spending_ratio
 
     Table SI 5 — Two-factor experience-curve parameters:
-        learning_by_doing_rate, learning_by_research_rate,
+        beta_learning_by_doing, beta_learning_by_research,
         experience_curve_intercept, knowledge_delay, knowledge_depreciation,
         knowledge_spillover_in_ratio, knowledge_spillover_delay
     """
@@ -79,8 +82,8 @@ class Manufacturer:
     max_capacity_decrease: float = 0.5
     rd_spending_ratio: float = 0.0
     rd_spending: float = 0.0
-    learning_by_doing_rate: float = 0.0
-    learning_by_research_rate: float = 0.0
+    beta_learning_by_doing: float = 0.0
+    beta_learning_by_research: float = 0.0
     experience_curve_intercept: float = 0.0
     knowledge_delay: int = 36
     knowledge_depreciation: float = 0.008742
@@ -145,9 +148,7 @@ class Manufacturer:
 
         try:
             if self._llm_client is None:
-                self._llm_client = AsyncOpenAI(
-                    api_key=os.environ.get("OPENAI_API_KEY", "sk-placeholder"),
-                )
+                self._llm_client = create_llm_client()
 
             messages = [
                 {"role": "system", "content": system_msg},
@@ -177,7 +178,9 @@ class Manufacturer:
                             "content": result,
                         })
                 elif msg.content:
-                    decision = ManufacturerDecision.model_validate_json(msg.content)
+                    decision = ManufacturerDecision.model_validate(
+                        extract_json_object(msg.content)
+                    )
                     self.memory.record(0, decision, "LLM decision (with tools)")
                     return decision
                 else:
@@ -185,7 +188,8 @@ class Manufacturer:
 
             raise ValueError("Tool loop exceeded without valid decision")
 
-        except Exception:
+        except Exception as exc:
+            print(f"[manufacturer:{self.region.value}] step_llm error: {type(exc).__name__}: {exc}")
             fallback = self._experience_curve_fallback(
                 electricity_price, fit_tariff, order_backlog, global_cumulative_mw
             )
@@ -257,15 +261,19 @@ class Manufacturer:
             depreciation=self.knowledge_depreciation,
         )
 
-        # Use global cumulative production for learning-by-doing
+        # Learning-by-doing driver.  NOTE: world installed capacity is used as a
+        # proxy for cumulative production; the paper uses *regional* production,
+        # but the foreign manufacturer's production is driven by the global
+        # market (not modelled here), so a pure own-CP would stall learning.
+        # See 测试记录.txt 第十三轮 for the tradeoff analysis.
         self.production_cost = compute_production_cost(
             cumulative_production=max(global_cumulative_mw, self.cumulative_production),
             knowledge_stock=self.knowledge_stock,
             cp_initial=self.cp_initial,
             ks_initial=self.ks_initial,
             intercept=self.experience_curve_intercept,
-            learning_by_doing_rate=self.learning_by_doing_rate,
-            learning_by_research_rate=self.learning_by_research_rate,
+            beta_learning_by_doing=self.beta_learning_by_doing,
+            beta_learning_by_research=self.beta_learning_by_research,
         )
 
         # Capacity decision: use demand relative to recent trend, not absolute
@@ -339,8 +347,8 @@ class Manufacturer:
                 cp_initial=self.cp_initial,
                 ks_initial=self.ks_initial,
                 intercept=self.experience_curve_intercept,
-                learning_by_doing_rate=self.learning_by_doing_rate,
-                learning_by_research_rate=self.learning_by_research_rate,
+                beta_learning_by_doing=self.beta_learning_by_doing,
+                beta_learning_by_research=self.beta_learning_by_research,
             )
 
         self._apply_capacity_change(decision.action, decision.change_percentage)
