@@ -1,0 +1,1234 @@
+{
+  "mode": "formula",
+  "config": {
+    "seed": 42,
+    "ticks": 120,
+    "adopters": 500,
+    "adopter_llm_fraction": 0.0,
+    "llm_model": "gpt-4.1-mini",
+    "board_size": null,
+    "board_temperature": null
+  },
+  "seconds": 8.9,
+  "final": {
+    "n_adopted": 8,
+    "installed_mw": 0.06,
+    "domestic_cost": 0.8175,
+    "foreign_cost": 1.4483,
+    "domestic_cost_reduction_pct": 71.1,
+    "foreign_cost_reduction_pct": 40.7,
+    "domestic_efficiency": 0.15,
+    "foreign_efficiency": 0.14,
+    "avg_fit": 0.0351
+  },
+  "actions": {
+    "reduce": 240
+  },
+  "rd_focus": {
+    "cost_reduction": 240
+  },
+  "board_fallback_meetings": 0,
+  "board_stats": {},
+  "trajectory": [
+    {
+      "tick": 0,
+      "year": 1991,
+      "domestic_cost": 2.8331,
+      "foreign_cost": 2.4442,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 6,
+      "installed_mw": 0.04
+    },
+    {
+      "tick": 1,
+      "year": 1991,
+      "domestic_cost": 2.7567,
+      "foreign_cost": 2.4405,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 2,
+      "year": 1991,
+      "domestic_cost": 2.685,
+      "foreign_cost": 2.4369,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 3,
+      "year": 1991,
+      "domestic_cost": 2.6176,
+      "foreign_cost": 2.4334,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 4,
+      "year": 1991,
+      "domestic_cost": 2.5539,
+      "foreign_cost": 2.4301,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 5,
+      "year": 1991,
+      "domestic_cost": 2.4938,
+      "foreign_cost": 2.4268,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 6,
+      "year": 1991,
+      "domestic_cost": 2.437,
+      "foreign_cost": 2.4236,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 7,
+      "year": 1991,
+      "domestic_cost": 2.383,
+      "foreign_cost": 2.4205,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 8,
+      "year": 1991,
+      "domestic_cost": 2.3319,
+      "foreign_cost": 2.4175,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 9,
+      "year": 1991,
+      "domestic_cost": 2.2832,
+      "foreign_cost": 2.4145,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 10,
+      "year": 1991,
+      "domestic_cost": 2.2369,
+      "foreign_cost": 2.4117,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 11,
+      "year": 1991,
+      "domestic_cost": 2.1927,
+      "foreign_cost": 2.4089,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 12,
+      "year": 1992,
+      "domestic_cost": 2.1506,
+      "foreign_cost": 2.4062,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 13,
+      "year": 1992,
+      "domestic_cost": 2.1104,
+      "foreign_cost": 2.4035,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 14,
+      "year": 1992,
+      "domestic_cost": 2.0719,
+      "foreign_cost": 2.4009,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 15,
+      "year": 1992,
+      "domestic_cost": 2.035,
+      "foreign_cost": 2.3984,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 16,
+      "year": 1992,
+      "domestic_cost": 1.9996,
+      "foreign_cost": 2.3959,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 7,
+      "installed_mw": 0.05
+    },
+    {
+      "tick": 17,
+      "year": 1992,
+      "domestic_cost": 1.9657,
+      "foreign_cost": 2.3935,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 18,
+      "year": 1992,
+      "domestic_cost": 1.9332,
+      "foreign_cost": 2.3912,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 19,
+      "year": 1992,
+      "domestic_cost": 1.9019,
+      "foreign_cost": 2.3889,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 20,
+      "year": 1992,
+      "domestic_cost": 1.8718,
+      "foreign_cost": 2.3866,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 21,
+      "year": 1992,
+      "domestic_cost": 1.8428,
+      "foreign_cost": 2.3844,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 22,
+      "year": 1992,
+      "domestic_cost": 1.8148,
+      "foreign_cost": 2.3823,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 23,
+      "year": 1992,
+      "domestic_cost": 1.7879,
+      "foreign_cost": 2.3802,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 24,
+      "year": 1993,
+      "domestic_cost": 1.7619,
+      "foreign_cost": 2.3781,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 25,
+      "year": 1993,
+      "domestic_cost": 1.7368,
+      "foreign_cost": 2.3761,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 26,
+      "year": 1993,
+      "domestic_cost": 1.7126,
+      "foreign_cost": 2.3741,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 27,
+      "year": 1993,
+      "domestic_cost": 1.6891,
+      "foreign_cost": 2.3722,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 28,
+      "year": 1993,
+      "domestic_cost": 1.6664,
+      "foreign_cost": 2.3703,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 29,
+      "year": 1993,
+      "domestic_cost": 1.6445,
+      "foreign_cost": 2.3684,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 30,
+      "year": 1993,
+      "domestic_cost": 1.6232,
+      "foreign_cost": 2.3666,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 31,
+      "year": 1993,
+      "domestic_cost": 1.6026,
+      "foreign_cost": 2.3648,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 32,
+      "year": 1993,
+      "domestic_cost": 1.5826,
+      "foreign_cost": 2.363,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 33,
+      "year": 1993,
+      "domestic_cost": 1.5632,
+      "foreign_cost": 2.3613,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 34,
+      "year": 1993,
+      "domestic_cost": 1.5443,
+      "foreign_cost": 2.3596,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 35,
+      "year": 1993,
+      "domestic_cost": 1.526,
+      "foreign_cost": 2.358,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 36,
+      "year": 1994,
+      "domestic_cost": 1.5083,
+      "foreign_cost": 2.3564,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 37,
+      "year": 1994,
+      "domestic_cost": 1.491,
+      "foreign_cost": 2.3548,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 38,
+      "year": 1994,
+      "domestic_cost": 1.4742,
+      "foreign_cost": 2.3532,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 39,
+      "year": 1994,
+      "domestic_cost": 1.4578,
+      "foreign_cost": 2.3517,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 40,
+      "year": 1994,
+      "domestic_cost": 1.4419,
+      "foreign_cost": 2.3502,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 41,
+      "year": 1994,
+      "domestic_cost": 1.4264,
+      "foreign_cost": 2.3487,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 42,
+      "year": 1994,
+      "domestic_cost": 1.4113,
+      "foreign_cost": 2.3472,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 43,
+      "year": 1994,
+      "domestic_cost": 1.3966,
+      "foreign_cost": 2.3458,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 44,
+      "year": 1994,
+      "domestic_cost": 1.3822,
+      "foreign_cost": 2.3444,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 45,
+      "year": 1994,
+      "domestic_cost": 1.3683,
+      "foreign_cost": 2.343,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 46,
+      "year": 1994,
+      "domestic_cost": 1.3546,
+      "foreign_cost": 2.3417,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 47,
+      "year": 1994,
+      "domestic_cost": 1.3413,
+      "foreign_cost": 2.3403,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 48,
+      "year": 1995,
+      "domestic_cost": 1.3283,
+      "foreign_cost": 2.339,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 49,
+      "year": 1995,
+      "domestic_cost": 1.3155,
+      "foreign_cost": 2.3377,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 50,
+      "year": 1995,
+      "domestic_cost": 1.3031,
+      "foreign_cost": 2.3365,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 51,
+      "year": 1995,
+      "domestic_cost": 1.291,
+      "foreign_cost": 2.3352,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 52,
+      "year": 1995,
+      "domestic_cost": 1.2791,
+      "foreign_cost": 2.334,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 53,
+      "year": 1995,
+      "domestic_cost": 1.2675,
+      "foreign_cost": 2.3328,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 54,
+      "year": 1995,
+      "domestic_cost": 1.2561,
+      "foreign_cost": 2.3316,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 55,
+      "year": 1995,
+      "domestic_cost": 1.245,
+      "foreign_cost": 2.3304,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 56,
+      "year": 1995,
+      "domestic_cost": 1.2342,
+      "foreign_cost": 2.3293,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 57,
+      "year": 1995,
+      "domestic_cost": 1.2235,
+      "foreign_cost": 2.3282,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 58,
+      "year": 1995,
+      "domestic_cost": 1.2131,
+      "foreign_cost": 2.3271,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 59,
+      "year": 1995,
+      "domestic_cost": 1.2029,
+      "foreign_cost": 2.326,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 60,
+      "year": 1996,
+      "domestic_cost": 1.1928,
+      "foreign_cost": 2.3249,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 61,
+      "year": 1996,
+      "domestic_cost": 1.183,
+      "foreign_cost": 2.3238,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 62,
+      "year": 1996,
+      "domestic_cost": 1.1734,
+      "foreign_cost": 2.3228,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 63,
+      "year": 1996,
+      "domestic_cost": 1.164,
+      "foreign_cost": 2.3217,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 64,
+      "year": 1996,
+      "domestic_cost": 1.1547,
+      "foreign_cost": 2.3207,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 65,
+      "year": 1996,
+      "domestic_cost": 1.1456,
+      "foreign_cost": 2.3197,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 66,
+      "year": 1996,
+      "domestic_cost": 1.1367,
+      "foreign_cost": 2.3187,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 67,
+      "year": 1996,
+      "domestic_cost": 1.128,
+      "foreign_cost": 2.3178,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 68,
+      "year": 1996,
+      "domestic_cost": 1.1194,
+      "foreign_cost": 2.3168,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 69,
+      "year": 1996,
+      "domestic_cost": 1.111,
+      "foreign_cost": 2.3159,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 70,
+      "year": 1996,
+      "domestic_cost": 1.1027,
+      "foreign_cost": 2.3149,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 71,
+      "year": 1996,
+      "domestic_cost": 1.0945,
+      "foreign_cost": 2.314,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 72,
+      "year": 1997,
+      "domestic_cost": 1.0865,
+      "foreign_cost": 2.3131,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 73,
+      "year": 1997,
+      "domestic_cost": 1.0787,
+      "foreign_cost": 2.3122,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 74,
+      "year": 1997,
+      "domestic_cost": 1.0709,
+      "foreign_cost": 2.3114,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 75,
+      "year": 1997,
+      "domestic_cost": 1.0633,
+      "foreign_cost": 2.3105,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 76,
+      "year": 1997,
+      "domestic_cost": 1.0559,
+      "foreign_cost": 2.3096,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 77,
+      "year": 1997,
+      "domestic_cost": 1.0485,
+      "foreign_cost": 2.3088,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 78,
+      "year": 1997,
+      "domestic_cost": 1.0413,
+      "foreign_cost": 2.308,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 79,
+      "year": 1997,
+      "domestic_cost": 1.0342,
+      "foreign_cost": 2.3072,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 80,
+      "year": 1997,
+      "domestic_cost": 1.0272,
+      "foreign_cost": 2.2942,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 81,
+      "year": 1997,
+      "domestic_cost": 1.0203,
+      "foreign_cost": 2.2697,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 82,
+      "year": 1997,
+      "domestic_cost": 1.0135,
+      "foreign_cost": 2.2453,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 83,
+      "year": 1997,
+      "domestic_cost": 1.0068,
+      "foreign_cost": 2.2211,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 84,
+      "year": 1998,
+      "domestic_cost": 1.0002,
+      "foreign_cost": 2.1971,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 85,
+      "year": 1998,
+      "domestic_cost": 0.9937,
+      "foreign_cost": 2.1731,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 86,
+      "year": 1998,
+      "domestic_cost": 0.9873,
+      "foreign_cost": 2.1493,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 87,
+      "year": 1998,
+      "domestic_cost": 0.981,
+      "foreign_cost": 2.1257,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 88,
+      "year": 1998,
+      "domestic_cost": 0.9748,
+      "foreign_cost": 2.1022,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 89,
+      "year": 1998,
+      "domestic_cost": 0.9687,
+      "foreign_cost": 2.0788,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 90,
+      "year": 1998,
+      "domestic_cost": 0.9627,
+      "foreign_cost": 2.0556,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 91,
+      "year": 1998,
+      "domestic_cost": 0.9567,
+      "foreign_cost": 2.0325,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 92,
+      "year": 1998,
+      "domestic_cost": 0.9509,
+      "foreign_cost": 2.0096,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 93,
+      "year": 1998,
+      "domestic_cost": 0.9451,
+      "foreign_cost": 1.9868,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 94,
+      "year": 1998,
+      "domestic_cost": 0.9394,
+      "foreign_cost": 1.9642,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 95,
+      "year": 1998,
+      "domestic_cost": 0.9337,
+      "foreign_cost": 1.9417,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 96,
+      "year": 1999,
+      "domestic_cost": 0.9282,
+      "foreign_cost": 1.9193,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 97,
+      "year": 1999,
+      "domestic_cost": 0.9227,
+      "foreign_cost": 1.8972,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 98,
+      "year": 1999,
+      "domestic_cost": 0.9173,
+      "foreign_cost": 1.8751,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 99,
+      "year": 1999,
+      "domestic_cost": 0.9119,
+      "foreign_cost": 1.8532,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 100,
+      "year": 1999,
+      "domestic_cost": 0.9067,
+      "foreign_cost": 1.8315,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 101,
+      "year": 1999,
+      "domestic_cost": 0.9015,
+      "foreign_cost": 1.8099,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 102,
+      "year": 1999,
+      "domestic_cost": 0.8963,
+      "foreign_cost": 1.7885,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 103,
+      "year": 1999,
+      "domestic_cost": 0.8912,
+      "foreign_cost": 1.7672,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 104,
+      "year": 1999,
+      "domestic_cost": 0.8862,
+      "foreign_cost": 1.7461,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 105,
+      "year": 1999,
+      "domestic_cost": 0.8813,
+      "foreign_cost": 1.7252,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 106,
+      "year": 1999,
+      "domestic_cost": 0.8764,
+      "foreign_cost": 1.7044,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 107,
+      "year": 1999,
+      "domestic_cost": 0.8715,
+      "foreign_cost": 1.6837,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 108,
+      "year": 2000,
+      "domestic_cost": 0.8667,
+      "foreign_cost": 1.6632,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 109,
+      "year": 2000,
+      "domestic_cost": 0.862,
+      "foreign_cost": 1.6429,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 110,
+      "year": 2000,
+      "domestic_cost": 0.8573,
+      "foreign_cost": 1.6227,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 111,
+      "year": 2000,
+      "domestic_cost": 0.8527,
+      "foreign_cost": 1.6027,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 112,
+      "year": 2000,
+      "domestic_cost": 0.8481,
+      "foreign_cost": 1.5828,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 113,
+      "year": 2000,
+      "domestic_cost": 0.8436,
+      "foreign_cost": 1.5631,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 114,
+      "year": 2000,
+      "domestic_cost": 0.8392,
+      "foreign_cost": 1.5436,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 115,
+      "year": 2000,
+      "domestic_cost": 0.8347,
+      "foreign_cost": 1.5242,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 116,
+      "year": 2000,
+      "domestic_cost": 0.8304,
+      "foreign_cost": 1.505,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 117,
+      "year": 2000,
+      "domestic_cost": 0.826,
+      "foreign_cost": 1.4859,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 118,
+      "year": 2000,
+      "domestic_cost": 0.8218,
+      "foreign_cost": 1.467,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    },
+    {
+      "tick": 119,
+      "year": 2000,
+      "domestic_cost": 0.8175,
+      "foreign_cost": 1.4483,
+      "domestic_capacity": 50000.0,
+      "domestic_efficiency": 0.15,
+      "n_adopted": 8,
+      "installed_mw": 0.06
+    }
+  ]
+}

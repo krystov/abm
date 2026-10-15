@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="ending" font-family="Segoe UI, Arial, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+
+  <g id="closing-statement" data-pptx-bounds="72 180 1136 320">
+    <rect id="motif-bar" x="72" y="196" width="56" height="4" fill="#2B5CE6" />
+    <text font-weight="700" font-size="48" font-family="Georgia, Cambria, Times New Roman, serif" fill="#101828" x="72" y="300">The equations stay.</text><text font-weight="700" font-size="48" font-family="Georgia, Cambria, Times New Roman, serif" fill="#101828" x="72" y="360">The AI only decides.</text><text x="72" y="450" font-size="28" fill="#2A2F3A">Agents gave the model its mechanism. The AI gave the agents a voice.</text>
+  </g>
+
+  <g id="closing-motif" data-pptx-bounds="72 520 1136 120">
+    <rect x="72" y="528" width="1136" height="8" fill="#E4572E" />
+    <text x="72" y="566" font-size="20" fill="#101828">EQUATIONS · THE WORLD — prices, costs, orders, the monthly loop</text>
+    <rect x="72" y="588" width="1136" height="8" fill="#2B5CE6" />
+    <text x="72" y="626" font-size="20" fill="#101828">THE AI · THE CHOICE — buy or not, expand or not, which R&amp;D to fund</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#101828" stroke-opacity="0.30" stroke-width="1" />
+    <text x="72" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75">Case built on Nuñez-Jimenez et al. (2022), Research Policy — Germany's solar PV policy mix, 1991–2016</text>
+    <text x="1208" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75" text-anchor="end">10 / 10</text>
+  </g>
+
+</svg>

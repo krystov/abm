@@ -1,0 +1,285 @@
+{
+  "schema": "ppt-master.svg-quality-report.v1",
+  "stage": "final",
+  "target": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\agent_explainer_ppt169_20261010",
+  "source_fingerprint": {
+    "algorithm": "sha256",
+    "digest": "615c0949160fa54ec9139088be65e6db8e2af7b8b95fa92a173c6f11a13f8ae1",
+    "file_count": 10,
+    "files": [
+      {
+        "file": "01_cover.svg",
+        "sha256": "ff2fb76939a1568c958d20e1f7d8bf9704ec40512520f39cb2575537715654c0"
+      },
+      {
+        "file": "02_what_is_an_agent.svg",
+        "sha256": "f11673ecb263f375e1762f23248396833e57acaac1c9900eab47aacf14cba950"
+      },
+      {
+        "file": "03_s_curve.svg",
+        "sha256": "9c89ba6f628bf8305bc6ec72be6d22163b65c03a5ef52fc31d95e7f2772487e0"
+      },
+      {
+        "file": "04_the_case.svg",
+        "sha256": "252ac8a323699466fa2519d84576c711729c5c254f6414c6a3691b56cb6532a8"
+      },
+      {
+        "file": "05_two_rules.svg",
+        "sha256": "fb4c5c2530bd7452c861cf9ed13bea1862cf310a259490c930d8145ed75b6e2c"
+      },
+      {
+        "file": "06_where_ai_enters.svg",
+        "sha256": "3bf02c71b8131943fc82a24bf0e3d22426f7e79677396a026bb72694e691bc98"
+      },
+      {
+        "file": "07_change_rationality.svg",
+        "sha256": "a46dcc449d6a3cb7b72bb4a9e7b53cddd0f7a43146242dd4e834643d87dddf64"
+      },
+      {
+        "file": "08_change_board.svg",
+        "sha256": "69ff8c6098e5637d520dbfe9863ea1b3749871199f05eb4312cb662fc2a317de"
+      },
+      {
+        "file": "09_what_it_means.svg",
+        "sha256": "99872f29431d8b10b9ecda748e2d8216c9a9cdf5532702738a5f70a25888fd4d"
+      },
+      {
+        "file": "10_closing.svg",
+        "sha256": "edf1a901bef05e208047bc92aa4941d05ed700f63ce855340d762b4807bde4f9"
+      }
+    ]
+  },
+  "summary": {
+    "total": 10,
+    "passed": 10,
+    "warnings": 0,
+    "errors": 0
+  },
+  "issue_types": {},
+  "categories": {
+    "blocking": {
+      "count": 0,
+      "issues": []
+    },
+    "introduced": {
+      "count": 0,
+      "issues": []
+    },
+    "inherited": {
+      "count": 0,
+      "issues": []
+    },
+    "source-import": {
+      "count": 0,
+      "summary": {
+        "warning_count": 0,
+        "by_code": {}
+      }
+    }
+  },
+  "drift": {
+    "colors": {
+      "#EEF2FF": [
+        "06_where_ai_enters.svg"
+      ]
+    },
+    "fonts": {},
+    "sizes": {}
+  },
+  "project_issues": {
+    "template": [],
+    "animation": [],
+    "illustration": [],
+    "communication_trace": [],
+    "pptx_structure": []
+  },
+  "files": [
+    {
+      "file": "01_cover.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\agent_explainer_ppt169_20261010\\svg_output\\01_cover.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Segoe UI, monospace",
+          "Georgia, Cambria, Times New Roman, serif",
+          "Segoe UI, Arial, sans-serif"
+        ],
+        "text_elements": 11,
+        "tspan_elements": 6
+      },
+      "passed": true,
+      "source_sha256": "ff2fb76939a1568c958d20e1f7d8bf9704ec40512520f39cb2575537715654c0"
+    },
+    {
+      "file": "02_what_is_an_agent.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\agent_explainer_ppt169_20261010\\svg_output\\02_what_is_an_agent.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Georgia, Cambria, Times New Roman, serif",
+          "Segoe UI, Arial, sans-serif"
+        ],
+        "text_elements": 18,
+        "tspan_elements": 18
+      },
+      "passed": true,
+      "source_sha256": "f11673ecb263f375e1762f23248396833e57acaac1c9900eab47aacf14cba950"
+    },
+    {
+      "file": "03_s_curve.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\agent_explainer_ppt169_20261010\\svg_output\\03_s_curve.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Georgia, Cambria, Times New Roman, serif",
+          "Segoe UI, Arial, sans-serif"
+        ],
+        "text_elements": 9,
+        "tspan_elements": 3
+      },
+      "passed": true,
+      "source_sha256": "9c89ba6f628bf8305bc6ec72be6d22163b65c03a5ef52fc31d95e7f2772487e0"
+    },
+    {
+      "file": "04_the_case.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\agent_explainer_ppt169_20261010\\svg_output\\04_the_case.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Georgia, Cambria, Times New Roman, serif",
+          "Segoe UI, Arial, sans-serif"
+        ],
+        "text_elements": 12,
+        "tspan_elements": 2
+      },
+      "passed": true,
+      "source_sha256": "252ac8a323699466fa2519d84576c711729c5c254f6414c6a3691b56cb6532a8"
+    },
+    {
+      "file": "05_two_rules.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\agent_explainer_ppt169_20261010\\svg_output\\05_two_rules.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Georgia, Cambria, Times New Roman, serif",
+          "Segoe UI, Arial, sans-serif"
+        ],
+        "text_elements": 9,
+        "tspan_elements": 6
+      },
+      "passed": true,
+      "source_sha256": "fb4c5c2530bd7452c861cf9ed13bea1862cf310a259490c930d8145ed75b6e2c"
+    },
+    {
+      "file": "06_where_ai_enters.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\agent_explainer_ppt169_20261010\\svg_output\\06_where_ai_enters.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Georgia, Cambria, Times New Roman, serif",
+          "Segoe UI, Arial, sans-serif"
+        ],
+        "text_elements": 15,
+        "tspan_elements": 11,
+        "contextual_values": {
+          "colors": [
+            "#EEF2FF"
+          ]
+        }
+      },
+      "passed": true,
+      "source_sha256": "3bf02c71b8131943fc82a24bf0e3d22426f7e79677396a026bb72694e691bc98"
+    },
+    {
+      "file": "07_change_rationality.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\agent_explainer_ppt169_20261010\\svg_output\\07_change_rationality.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Georgia, Cambria, Times New Roman, serif",
+          "Segoe UI, Arial, sans-serif"
+        ],
+        "text_elements": 11,
+        "tspan_elements": 6
+      },
+      "passed": true,
+      "source_sha256": "a46dcc449d6a3cb7b72bb4a9e7b53cddd0f7a43146242dd4e834643d87dddf64"
+    },
+    {
+      "file": "08_change_board.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\agent_explainer_ppt169_20261010\\svg_output\\08_change_board.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Consolas, Segoe UI, monospace",
+          "Georgia, Cambria, Times New Roman, serif",
+          "Segoe UI, Arial, sans-serif"
+        ],
+        "text_elements": 20,
+        "tspan_elements": 3
+      },
+      "passed": true,
+      "source_sha256": "69ff8c6098e5637d520dbfe9863ea1b3749871199f05eb4312cb662fc2a317de"
+    },
+    {
+      "file": "09_what_it_means.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\agent_explainer_ppt169_20261010\\svg_output\\09_what_it_means.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Georgia, Cambria, Times New Roman, serif",
+          "Segoe UI, Arial, sans-serif"
+        ],
+        "text_elements": 13,
+        "tspan_elements": 12
+      },
+      "passed": true,
+      "source_sha256": "99872f29431d8b10b9ecda748e2d8216c9a9cdf5532702738a5f70a25888fd4d"
+    },
+    {
+      "file": "10_closing.svg",
+      "path": "C:\\Users\\ASUS\\PycharmProjects\\solar-abm-replication\\ppt_report\\agent_explainer_ppt169_20261010\\svg_output\\10_closing.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "info": {
+        "viewbox": "0 0 1280 720",
+        "fonts": [
+          "Georgia, Cambria, Times New Roman, serif",
+          "Segoe UI, Arial, sans-serif"
+        ],
+        "text_elements": 6,
+        "tspan_elements": 2
+      },
+      "passed": true,
+      "source_sha256": "edf1a901bef05e208047bc92aa4941d05ed700f63ce855340d762b4807bde4f9"
+    }
+  ]
+}

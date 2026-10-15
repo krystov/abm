@@ -49,3 +49,41 @@ class AdopterDecision(BaseModel):
         default="",
         description="Brief rationale for adoption decision"
     )
+
+
+class DirectorVote(BaseModel):
+    """Structured ballot cast by one board director.
+
+    A director votes on both agenda items of the monthly board meeting and may
+    abstain on either of them (``vote`` / ``rd_focus`` = ``"abstain"``).
+    ``director`` and ``role`` are filled in by the board, not by the LLM.
+    """
+
+    director: str = Field(default="", description="Director name (set by the board)")
+    role: str = Field(default="", description="Board seat title (set by the board)")
+    vote: Literal["expand", "maintain", "reduce", "abstain"] = Field(
+        description="Capacity motion this director supports (or abstain)"
+    )
+    intensity: float = Field(
+        default=0.0,
+        ge=0.0,
+        le=0.5,
+        description="How hard to expand/reduce, in [0.0, 0.5]; ignored for maintain",
+    )
+    rd_focus: Literal["efficiency", "cost_reduction", "none", "abstain"] = Field(
+        description="R&D priority this director supports (or abstain)"
+    )
+    confidence: float = Field(
+        default=0.5,
+        ge=0.0,
+        le=1.0,
+        description="Director's confidence in this ballot [0.0, 1.0]",
+    )
+    reasoning: str = Field(
+        default="",
+        description="Why the director votes this way (Chinese, 1-2 sentences)",
+    )
+    concern: str = Field(
+        default="",
+        description="The director's main concern about the decision (optional)",
+    )

@@ -1,0 +1,1 @@
+Let me leave you with the boundary we drew. The equations stay. The world — prices, costs, orders, the monthly loop — is still the model. The AI only decides: buy or not, expand or not, which research to fund. Agents gave the model its mechanism. The AI gave the agents a voice. Thank you.

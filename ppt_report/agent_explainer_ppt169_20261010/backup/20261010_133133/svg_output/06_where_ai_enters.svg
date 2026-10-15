@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="content"
+     font-family="Segoe UI, Arial, sans-serif">
+
+  <defs>
+    <marker id="arrow-step" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <polygon points="0,0 10,5 0,10" fill="#101828"/>
+    </marker>
+  </defs>
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#2B5CE6"/>
+    <text x="72" y="96" font-size="20" fill="#101828" fill-opacity="0.78">THE RULES · 2 OF 2</text>
+    <text x="72" y="142" font-family="Georgia, Cambria, Times New Roman, serif" font-size="48" font-weight="700" fill="#101828">The AI gets one step</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#101828" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="handover-diagram" data-pptx-bounds="108 230 1064 200">
+    <rect x="108" y="270" width="300" height="130" fill="#F8FAFC" stroke="#D7DCE5" stroke-width="1"/>
+    <text x="132" y="316" font-size="20" font-weight="700" fill="#101828">STATE</text>
+    <text x="132" y="350" font-size="20" fill="#2A2F3A"><tspan x="132" dy="0">prices, knowledge,</tspan><tspan x="132" dy="26">orders, neighbours</tspan></text>
+
+    <rect x="490" y="270" width="300" height="130" fill="#EEF2FF" stroke="#2B5CE6" stroke-width="2"/>
+    <text x="514" y="316" font-size="20" font-weight="700" fill="#2B5CE6">DECISION — REPLACED</text>
+    <text x="514" y="350" font-size="20" fill="#2A2F3A"><tspan x="514" dy="0">buy or not, expand or not,</tspan><tspan x="514" dy="26">which R&amp;D to fund</tspan></text>
+
+    <rect x="872" y="270" width="300" height="130" fill="#F8FAFC" stroke="#D7DCE5" stroke-width="1"/>
+    <text x="896" y="316" font-size="20" font-weight="700" fill="#101828">UPDATE</text>
+    <text x="896" y="350" font-size="20" fill="#2A2F3A"><tspan x="896" dy="0">the model applies it and</tspan><tspan x="896" dy="26">advances one month</tspan></text>
+
+    <line x1="412" y1="335" x2="484" y2="335" stroke="#101828" stroke-width="2" marker-end="url(#arrow-step)"/>
+    <line x1="794" y1="335" x2="866" y2="335" stroke="#101828" stroke-width="2" marker-end="url(#arrow-step)"/>
+  </g>
+
+  <g id="handover-columns" data-pptx-bounds="72 450 1136 150">
+    <use data-icon="tabler-outline/building-factory" x="72" y="452" width="26" height="26" fill="#2B5CE6" stroke-width="2"/>
+    <text x="112" y="474" font-size="28" font-weight="700" fill="#101828">Manufacturers</text>
+    <text x="112" y="512" font-size="20" fill="#2A2F3A"><tspan x="112" dy="0">Every month the firm's decision now comes from a board of five</tspan><tspan x="112" dy="26">AI directors with different mandates. They vote, and they leave minutes.</tspan></text>
+    <use data-icon="tabler-outline/users" x="672" y="452" width="26" height="26" fill="#2B5CE6" stroke-width="2"/>
+    <text x="712" y="474" font-size="28" font-weight="700" fill="#101828">Consumers</text>
+    <text x="712" y="512" font-size="20" fill="#2A2F3A"><tspan x="712" dy="0">A 5% sample of undecided adopters</tspan><tspan x="712" dy="26">is asked each month, instead of</tspan><tspan x="712" dy="26">running the equation.</tspan></text>
+  </g>
+
+  <g id="handover-safety" data-pptx-bounds="72 608 1136 40">
+    <text x="72" y="638" font-size="20" fill="#101828">If a call fails, the model falls back to the original equation, so the simulation never stalls.</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#101828" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75">State updates, accounting and the monthly loop stay in the original model</text>
+    <text x="1208" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75" text-anchor="end">06 / 10</text>
+  </g>
+
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="content"
+     font-family="Segoe UI, Arial, sans-serif">
+
+  <defs>
+    <marker id="arrow-open" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <polygon points="0,0 10,5 0,10" fill="#2B5CE6"/>
+    </marker>
+  </defs>
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#2B5CE6"/>
+    <text x="72" y="96" font-size="20" fill="#101828" fill-opacity="0.78">WHAT CHANGED · 1 OF 2</text>
+    <text x="72" y="142" font-family="Georgia, Cambria, Times New Roman, serif" font-size="48" font-weight="700" fill="#101828">The rationality gate disappears</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#101828" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="gate-compare" data-pptx-bounds="72 200 1136 250">
+    <text x="72" y="240" font-size="20" font-weight="700" fill="#E4572E">RULE-BASED CONSUMER</text>
+    <line x1="100" y1="310" x2="286" y2="310" stroke="#E4572E" stroke-width="4"/>
+    <rect x="292" y="282" width="8" height="56" fill="#E4572E"/>
+    <rect x="320" y="282" width="8" height="56" fill="#E4572E"/>
+    <line x1="334" y1="310" x2="560" y2="310" stroke="#E4572E" stroke-width="4"/>
+    <text x="72" y="390" font-size="20" fill="#2A2F3A"><tspan x="72" dy="0">must pass: net present value ≥ 0</tspan><tspan x="72" dy="30">otherwise: do not buy</tspan></text>
+
+    <text x="664" y="240" font-size="20" font-weight="700" fill="#2B5CE6">AI CONSUMER</text>
+    <line x1="692" y1="310" x2="1180" y2="310" stroke="#2B5CE6" stroke-width="4" marker-end="url(#arrow-open)"/>
+    <text x="664" y="390" font-size="20" fill="#2A2F3A"><tspan x="664" dy="0">the same market figures, no gate</tspan><tspan x="664" dy="30">the agent simply decides</tspan></text>
+  </g>
+
+  <g id="gate-reasons" data-pptx-bounds="72 470 1136 150">
+    <text x="72" y="506" font-size="20" font-weight="700" fill="#101828">WHAT THE EQUATION CANNOT HOLD</text>
+    <text x="72" y="550" font-size="20" fill="#2A2F3A"><tspan x="72" dy="0">what the neighbours are doing · how it feels about the technology</tspan><tspan x="72" dy="30">what it expects from the next subsidy round</tspan></text>
+  </g>
+
+  <g id="gate-status" data-pptx-bounds="72 626 1136 34">
+    <text x="72" y="650" font-size="18" fill="#2A2F3A" fill-opacity="0.75">Mechanism verified in the code and in short live runs; the full 26-year comparison is still pending.</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#101828" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75">Baseline adoption in the formula model: 50 of 500 agents, about 10%, against a historical rate near 7%</text>
+    <text x="1208" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75" text-anchor="end">07 / 10</text>
+  </g>
+
+</svg>

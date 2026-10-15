@@ -25,6 +25,9 @@ Thumbs.db
 results.png
 *.pyc
 
+# Board-of-directors meeting transcripts (generated per run)
+board_logs/
+
 # Environment secrets
 .env
 .env.local
@@ -45,4 +48,3 @@ results.png
 *.pdf
 *.docx
 _docx_tables*.txt
-

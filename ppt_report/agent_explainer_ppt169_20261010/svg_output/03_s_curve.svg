@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="content"
+     font-family="Segoe UI, Arial, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#2B5CE6"/>
+    <text x="72" y="96" font-size="20" fill="#101828" fill-opacity="0.78">THE IDEA · 2 OF 3</text>
+    <text x="72" y="142" font-family="Georgia, Cambria, Times New Roman, serif" font-size="48" font-weight="700" fill="#101828">Nobody plans the S-curve</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#101828" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+
+  <g id="curve-statement" data-pptx-bounds="72 200 1136 150">
+    <text x="72" y="244" font-size="28" fill="#2A2F3A"><tspan x="72" dy="0">Install a panel because your neighbour did, because the subsidy</tspan><tspan x="72" dy="40">changed, and because the price fell — and the curve appears on its</tspan><tspan x="72" dy="40">own. No agent in this model knows what a diffusion curve is.</tspan></text>
+  </g>
+
+  <g id="curve-figure" data-pptx-bounds="72 360 1136 280">
+    <line x1="110" y1="600" x2="1180" y2="600" stroke="#D7DCE5" stroke-width="2"/>
+    <line x1="110" y1="420" x2="110" y2="600" stroke="#D7DCE5" stroke-width="2"/>
+    <path d="M110 596 C300 592 380 552 520 496 C660 440 740 412 900 402 C1020 396 1100 396 1180 396"
+          fill="none" stroke="#2B5CE6" stroke-width="4"/>
+    <circle cx="520" cy="496" r="6" fill="#2B5CE6"/>
+    <circle cx="900" cy="402" r="6" fill="#2B5CE6"/>
+    <text x="150" y="566" font-size="20" fill="#E4572E">slow start</text>
+    <text x="556" y="470" font-size="20" fill="#E4572E">take-off</text>
+    <text x="944" y="384" font-size="20" fill="#E4572E">saturation</text>
+    <text x="110" y="632" font-size="18" fill="#2A2F3A" fill-opacity="0.7">Illustrative shape only — no data is plotted on this page.</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#101828" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75">Emergence: the aggregate pattern is an output of the micro rules, never an input</text>
+    <text x="1208" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75" text-anchor="end">03 / 10</text>
+  </g>
+
+</svg>

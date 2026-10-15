@@ -16,6 +16,7 @@ from agents.agent_framework import (
     create_llm_client,
     extract_json_object,
 )
+from agents.board import Board, BoardOutcome
 from agents.tools import build_manufacturer_tools
 from schemas import ManufacturerDecision
 from submodels.experience_curve import compute_production_cost, update_knowledge_stock
@@ -92,6 +93,10 @@ class Manufacturer:
     cp_initial: float = 1.0
     ks_initial: float = 1.0
     memory: ConversationMemory = field(default_factory=ConversationMemory)
+    board: Optional[Board] = None
+    board_size: int = 5
+    board_temperature: float = 0.6
+    llm_failures: int = 0
     _llm_client: Optional[AsyncOpenAI] = field(default=None, repr=False, compare=False)
 
     # ------------------------------------------------------------------
@@ -189,9 +194,14 @@ class Manufacturer:
             raise ValueError("Tool loop exceeded without valid decision")
 
         except Exception as exc:
+            self.llm_failures += 1
             print(f"[manufacturer:{self.region.value}] step_llm error: {type(exc).__name__}: {exc}")
+            # NOTE: apply=False — the caller applies the decision through
+            # apply_llm_decision(), so the state must not be updated here
+            # (doing both would double-count production and capacity).
             fallback = self._experience_curve_fallback(
-                electricity_price, fit_tariff, order_backlog, global_cumulative_mw
+                electricity_price, fit_tariff, order_backlog,
+                global_cumulative_mw, apply=False,
             )
             self.memory.record(0, fallback, "Experience-curve fallback (LLM unavailable)")
             return fallback
@@ -233,6 +243,124 @@ class Manufacturer:
         )
 
     # ------------------------------------------------------------------
+    # Board-of-directors monthly decision (group decision making)
+    # ------------------------------------------------------------------
+
+    def _region_label(self) -> str:
+        if self.region.value == "domestic":
+            return "国内厂商 (domestic)"
+        return "海外厂商 (foreign)"
+
+    def ensure_board(self) -> Board:
+        """Create the board of directors lazily (one per manufacturer)."""
+        if self.board is None:
+            self.board = Board.default_chamber(
+                region_label=self._region_label(),
+                size=self.board_size,
+                temperature=self.board_temperature,
+            )
+        return self.board
+
+    def _build_board_agenda(
+        self,
+        electricity_price: float,
+        fit_tariff: float,
+        order_backlog: float,
+        tech_push_level: float,
+        tick: int = 0,
+        year: Optional[float] = None,
+    ) -> str:
+        """Assemble the monthly agenda the board votes on."""
+        year_label = f"{year:.0f} 年" if year is not None else "当期"
+        utilization = self.sales / max(self.capacity, 0.001)
+        gross_margin = (self.price - self.production_cost) / max(self.price, 0.001)
+        return (
+            f"=== 本月董事会议程 · {year_label}（tick {tick}）===\n"
+            f"公司：{self._region_label()}\n\n"
+            f"议案A — 产能决议：expand（扩产）/ maintain（维持）/ reduce（减产），"
+            f"并给出强度 intensity ∈ [0.0, 0.5]\n"
+            f"议案B — 研发重点：efficiency（效率）/ cost_reduction（降本）/ none（不投）\n\n"
+            f"--- 市场环境（本月）---\n"
+            f"  零售电价              : {electricity_price:.4f} €/kWh\n"
+            f"  上网电价 FiT          : {fit_tariff:.4f} €/kWh\n"
+            f"  装机商订单积压        : {order_backlog:.2f} MW\n"
+            f"  政府研发支持强度      : {tech_push_level:.0f} / 5\n\n"
+            f"--- 公司现状 ---\n"
+            f"  生产产能              : {self.capacity:.2f} MW/月\n"
+            f"  上月销售              : {self.sales:.2f} MW\n"
+            f"  产能利用率            : {utilization:.1%}\n"
+            f"  库存                  : {self.stock:.2f} MW\n"
+            f"  模块效率              : {self.module_efficiency:.4f}\n"
+            f"  生产成本              : {self.production_cost:.4f} €/W\n"
+            f"  售价                  : {self.price:.4f} €/W\n"
+            f"  毛利率                : {gross_margin:.1%}\n"
+            f"  知识存量              : {self.knowledge_stock:.1f}\n"
+            f"  累计产量              : {self.cumulative_production:.1f} MW\n"
+            f"  员工数                : {self.employees}\n"
+            f"  本月研发支出          : {self.rd_spending:.3f}\n\n"
+            f"--- 决策提示 ---\n"
+            f"  · 电价与 FiT 高、订单积压明显高于产能 → 需求强，倾向扩产\n"
+            f"  · 产能利用率高且库存低 → 扩产证据充分\n"
+            f"  · 需求疲软、库存堆积、产能大量闲置 → 倾向减产\n"
+            f"  · 选 cost_reduction 会走经验曲线，把累计产量与知识存量转成更低的成本\n"
+            f"  · 选 efficiency 每月提升 0.5% 模块效率（上限 30%），不直接降成本\n"
+            f"  · 选 none 表示本月不投研发\n"
+            f"  · maintain 时 intensity 记为 0；expand/reduce 时 intensity ∈ [0.0, 0.5]\n\n"
+            f"=== 上一次董事会决议（供参考）===\n"
+            f"{self.memory.format_for_prompt()}\n"
+        )
+
+    async def step_board(
+        self,
+        electricity_price: float,
+        fit_tariff: float,
+        order_backlog: float,
+        tech_push_level: float = 1.0,
+        model_name: str = "gpt-4.1-mini",
+        global_cumulative_mw: float = 500.0,
+        tick: int = 0,
+        year: Optional[float] = None,
+        temperature: Optional[float] = None,
+    ) -> BoardOutcome:
+        """Convene the board of directors and return the meeting minutes.
+
+        The outcome carries a validated decision, but does **not** modify the
+        manufacturer's state: the caller applies it with
+        ``apply_llm_decision`` (same contract as ``step_llm``).  If the board
+        fails to reach a quorum, the deterministic experience-curve decision is
+        attached instead and ``fallback_used`` is set.
+        """
+        board = self.ensure_board()
+        agenda = self._build_board_agenda(
+            electricity_price,
+            fit_tariff,
+            order_backlog,
+            tech_push_level,
+            tick=tick,
+            year=year,
+        )
+        outcome = await board.convene(
+            agenda,
+            model_name=model_name,
+            tick=tick,
+            year=year,
+            temperature=temperature,
+        )
+
+        if outcome.decision is None:
+            outcome.decision = self._experience_curve_fallback(
+                electricity_price,
+                fit_tariff,
+                order_backlog,
+                global_cumulative_mw,
+                apply=False,
+            )
+            outcome.fallback_used = True
+
+        self.memory.record(tick, outcome.decision, outcome.summary_line())
+        return outcome
+
+    # ------------------------------------------------------------------
     # Deterministic fallback: two-factor experience curve
     # ------------------------------------------------------------------
 
@@ -242,6 +370,7 @@ class Manufacturer:
         fit_tariff: float,
         order_backlog: float,
         global_cumulative_mw: float = 500.0,
+        apply: bool = True,
     ) -> ManufacturerDecision:
         """Apply the paper's two-factor experience curve (Eq. 24-25) directly.
 
@@ -250,12 +379,17 @@ class Manufacturer:
 
         Capacity decisions are based on demand trend, not absolute backlog,
         since manufacturer capacities far exceed the scaled-down model demand.
+
+        ``apply=True`` (formula-only mode) updates the agent's own state here.
+        ``apply=False`` only *computes* the decision, leaving every state
+        update to ``apply_llm_decision`` — that is the contract used by the LLM
+        and board paths, where the caller applies the decision afterwards.
         """
-        self.cumulative_production += self.sales
+        next_cumulative_production = self.cumulative_production + self.sales
 
         # Knowledge spillover from the other manufacturer
         # (handled externally via apply_spillover — this only updates own KS)
-        self.knowledge_stock = update_knowledge_stock(
+        next_knowledge_stock = update_knowledge_stock(
             ks_current=self.knowledge_stock,
             rd_spending=self.rd_spending,
             depreciation=self.knowledge_depreciation,
@@ -266,9 +400,9 @@ class Manufacturer:
         # but the foreign manufacturer's production is driven by the global
         # market (not modelled here), so a pure own-CP would stall learning.
         # See 测试记录.txt 第十三轮 for the tradeoff analysis.
-        self.production_cost = compute_production_cost(
-            cumulative_production=max(global_cumulative_mw, self.cumulative_production),
-            knowledge_stock=self.knowledge_stock,
+        next_production_cost = compute_production_cost(
+            cumulative_production=max(global_cumulative_mw, next_cumulative_production),
+            knowledge_stock=next_knowledge_stock,
             cp_initial=self.cp_initial,
             ks_initial=self.ks_initial,
             intercept=self.experience_curve_intercept,
@@ -289,23 +423,25 @@ class Manufacturer:
             action = "maintain"
             change_pct = 0.0
 
-        self._apply_capacity_change(action, change_pct)
-        self.price = self.production_cost * (1.0 + self.mark_up)
+        # The formula path always re-applies the experience curve, i.e. it is
+        # equivalent to choosing "cost_reduction" every month (it never spends
+        # the month on the +0.5% efficiency branch).
+        rd_focus = "cost_reduction" if self.rd_spending > 0 else "none"
 
-        if self.rd_spending > 0 and self.region.value == "domestic":
-            rd_focus = "cost_reduction"
-        elif self.rd_spending > 0:
-            rd_focus = "efficiency"
-        else:
-            rd_focus = "none"
+        if apply:
+            self.cumulative_production = next_cumulative_production
+            self.knowledge_stock = next_knowledge_stock
+            self.production_cost = next_production_cost
+            self._apply_capacity_change(action, change_pct)
+            self.price = self.production_cost * (1.0 + self.mark_up)
 
         return ManufacturerDecision(
             action=action,
             change_percentage=round(change_pct, 4),
             rd_focus=rd_focus,
             reasoning=(
-                f"Experience-curve fallback: CP={self.cumulative_production:.1f} MW, "
-                f"KS={self.knowledge_stock:.1f}, MC={self.production_cost:.4f} €/W, "
+                f"Experience-curve fallback: CP={next_cumulative_production:.1f} MW, "
+                f"KS={next_knowledge_stock:.1f}, MC={next_production_cost:.4f} €/W, "
                 f"backlog={order_backlog:.1f} MW vs cap={self.capacity:.1f} MW"
             ),
         )

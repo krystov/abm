@@ -26,6 +26,13 @@ class ModelConfig:
     llm_adopter_fraction: float = 0.05  # fraction of undecided adopters using LLM per tick
     llm_max_retries: int = 2
 
+    # Board-of-directors group decision (manufacturers) — agents/board.py
+    use_board: bool = True          # manufacturers vote in a board instead of one LLM call
+    board_size: int = 5             # number of directors (odd number → no ties but by 1 vote)
+    board_temperature: float = 0.6  # higher than single-agent: lets directors disagree
+    board_verbose: bool = True      # print every director's reasoning + the tally
+    board_log_dir: str = "board_logs"   # meeting minutes written here per run
+
     # Whether to use real historical data (True) or synthetic (False)
     use_real_data: bool = False
 

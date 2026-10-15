@@ -9,9 +9,11 @@ on the main event loop without LLM involvement.
 import asyncio
 import math
 import random
-from typing import Dict, List
+from pathlib import Path
+from typing import Dict, List, Optional
 
 from agents import Adopter, AdopterType, Installer, Manufacturer, Region
+from agents.board import BoardOutcome
 from environment.macro_environment import MacroEnvironment
 from schemas import ManufacturerDecision
 from submodels.adoption import (
@@ -47,6 +49,11 @@ class SolarModel:
         seed: int = 42,
         llm_adopter_fraction: float = 0.05,
         use_llm: bool = True,
+        use_board: bool = True,
+        board_size: int = 5,
+        board_temperature: float = 0.6,
+        board_verbose: bool = True,
+        board_log_path: Optional[str] = None,
         use_real_data: bool = False,
         n_seed_adopters: int = 0,
     ):
@@ -55,6 +62,14 @@ class SolarModel:
         self.llm_model = llm_model
         self.llm_adopter_fraction = llm_adopter_fraction
         self.use_llm = use_llm
+        # Board-of-directors mode: manufacturers decide by majority vote of
+        # AI directors instead of a single LLM call (see agents/board.py).
+        self.use_board = use_board
+        self.board_size = board_size
+        self.board_temperature = board_temperature
+        self.board_verbose = board_verbose
+        self.board_log_path = board_log_path
+        self.last_board_records: Dict[str, BoardOutcome] = {}
         self.use_real_data = use_real_data
         self.n_seed_adopters = n_seed_adopters
         self.rng = random.Random(seed)
@@ -458,6 +473,17 @@ class SolarModel:
     # Manufacturer step (async — LLM calls via asyncio.gather)
     # ------------------------------------------------------------------
 
+    def _publish_board_minutes(self, outcome: BoardOutcome) -> None:
+        """Print the board transcript and/or append it to the minutes log."""
+        minutes = outcome.format_minutes()
+        if self.board_verbose:
+            print(minutes)
+        if self.board_log_path:
+            path = Path(self.board_log_path)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with path.open("a", encoding="utf-8") as handle:
+                handle.write(minutes + "\n\n")
+
     async def _step_manufacturers(
         self,
         electricity_price: float,
@@ -466,8 +492,38 @@ class SolarModel:
         tech_push_level: float,
         global_cumulative_mw: float = 500.0,
     ) -> Dict[str, ManufacturerDecision]:
-        """Concurrently query all manufacturers via step_llm (or fallback if use_llm=False)."""
-        if self.use_llm:
+        """Concurrently query all manufacturers via the board / step_llm / formula."""
+        self.last_board_records = {}
+
+        if self.use_llm and self.use_board:
+            # --- Board-of-directors mode: each manufacturer convenes its board ---
+            tasks = []
+            for key, mfg in self.manufacturers.items():
+                tasks.append(
+                    mfg.step_board(
+                        electricity_price=electricity_price,
+                        fit_tariff=fit_tariff,
+                        order_backlog=order_backlog,
+                        tech_push_level=float(tech_push_level),
+                        model_name=self.llm_model,
+                        global_cumulative_mw=global_cumulative_mw,
+                        tick=self.tick,
+                        year=1991 + self.tick / 12,
+                        temperature=self.board_temperature,
+                    )
+                )
+            outcomes = await asyncio.gather(*tasks)
+
+            decisions = []
+            for (key, mfg), outcome in zip(self.manufacturers.items(), outcomes):
+                self.last_board_records[key] = outcome
+                self._publish_board_minutes(outcome)
+                mfg.apply_llm_decision(
+                    outcome.decision, global_cumulative_mw=global_cumulative_mw
+                )
+                decisions.append(outcome.decision)
+
+        elif self.use_llm:
             tasks = []
             for key, mfg in self.manufacturers.items():
                 tasks.append(
@@ -496,7 +552,7 @@ class SolarModel:
         # Apply each decision
         result = {}
         for (key, mfg), decision in zip(self.manufacturers.items(), decisions):
-            if self.use_llm:
+            if self.use_llm and not self.use_board:
                 mfg.apply_llm_decision(decision, global_cumulative_mw=global_cumulative_mw)
             result[key] = decision
 
@@ -571,6 +627,8 @@ class SolarModel:
 
         # 5. Bookkeeping ───────────────────────────────────────────────
         n_adopted = sum(1 for a in self.adopters if a.is_adopted)
+        dom_board = self.last_board_records.get("domestic")
+        for_board = self.last_board_records.get("foreign")
         record = {
             "tick": t,
             "year": 1991 + t / 12,
@@ -595,6 +653,8 @@ class SolarModel:
             "foreign_capacity": round(for_mfg.capacity, 2),
             "domestic_decision": mfg_decisions.get("domestic", None),
             "foreign_decision": mfg_decisions.get("foreign", None),
+            "domestic_board": dom_board.to_record() if dom_board else None,
+            "foreign_board": for_board.to_record() if for_board else None,
         }
         self.history.append(record)
 

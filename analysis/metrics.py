@@ -59,6 +59,45 @@ def compute_metrics(history: List[dict]) -> Dict:
         },
         "annual_adoptions": _annual_snapshots(history),
         "annual_additions": _annual_additions(history),
+        "board_stats": _board_stats(history),
+    }
+
+
+def _board_stats(history: List[dict]) -> Dict:
+    """Aggregate the board-of-directors meetings recorded in the history.
+
+    Returns an empty dict when the run was formula-only or single-LLM (no
+    board data in the history records).
+    """
+    from collections import Counter
+
+    meetings = []
+    for record in history:
+        for key in ("domestic_board", "foreign_board"):
+            board = record.get(key)
+            if board:
+                meetings.append(board)
+
+    if not meetings:
+        return {}
+
+    n = len(meetings)
+    unanimous = sum(1 for m in meetings if m.get("unanimous"))
+    fallback = sum(1 for m in meetings if m.get("fallback_used"))
+    ties = sum(1 for m in meetings if m.get("tie_broken"))
+    dissent = sum(m.get("n_dissent", 0) for m in meetings)
+    abstain = sum(m.get("n_abstain", 0) for m in meetings)
+
+    return {
+        "meetings": n,
+        "unanimous_meetings": unanimous,
+        "unanimous_pct": round(100 * unanimous / n, 1),
+        "tie_broken_meetings": ties,
+        "fallback_meetings": fallback,
+        "avg_dissent": round(dissent / n, 2),
+        "avg_abstain": round(abstain / n, 2),
+        "actions": dict(Counter(m.get("action") or "no_resolution" for m in meetings)),
+        "rd_focus": dict(Counter(m.get("rd_focus") or "no_resolution" for m in meetings)),
     }
 
 
@@ -120,6 +159,17 @@ def print_summary(metrics: Dict) -> None:
     print(f"  Foreign decisions     : expand={metrics['foreign_decisions']['expand']}, "
           f"maintain={metrics['foreign_decisions']['maintain']}, "
           f"reduce={metrics['foreign_decisions']['reduce']}")
+
+    board = metrics.get("board_stats") or {}
+    if board:
+        print("-" * 62)
+        print(f"  Board meetings        : {board['meetings']} 场"
+              f"（一致通过 {board['unanimous_pct']:.1f}%，"
+              f"平票主席裁决 {board['tie_broken_meetings']}，"
+              f"未达半数 {board['fallback_meetings']}）")
+        print(f"  Avg dissent/abstain   : {board['avg_dissent']} / {board['avg_abstain']} 票")
+        print(f"  Motion A (capacity)   : {board['actions']}")
+        print(f"  Motion B (R&D)        : {board['rd_focus']}")
 
     # Validation checkpoints
     if metrics.get("annual_adoptions"):

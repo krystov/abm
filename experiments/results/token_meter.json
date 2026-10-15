@@ -1,0 +1,24 @@
+{
+  "single_mfg": {
+    "calls": 2,
+    "prompt": 2341,
+    "completion": 161,
+    "cache_hit": 1280,
+    "cache_miss": 1061
+  },
+  "board": {
+    "calls": 5,
+    "prompt": 5637,
+    "completion": 888,
+    "cache_hit": 640,
+    "cache_miss": 4997
+  },
+  "adopter": {
+    "calls": 2,
+    "prompt": 2452,
+    "completion": 246,
+    "cache_hit": 1280,
+    "cache_miss": 1172
+  },
+  "model": "deepseek-chat"
+}

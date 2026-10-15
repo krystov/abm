@@ -5,6 +5,7 @@ Import from sub-modules and re-export for backward compatibility.
 """
 
 from agents.adopter import Adopter, AdopterType
+from agents.board import Board, BoardOutcome, Director, DirectorPersona
 from agents.manufacturer import Manufacturer, Region, SupplierType
 from agents.installer import Installer
 from agents.agent_framework import BaseLLMAgent, ConversationMemory, Tool, ToolRegistry
@@ -12,6 +13,10 @@ from agents.agent_framework import BaseLLMAgent, ConversationMemory, Tool, ToolR
 __all__ = [
     "Adopter",
     "AdopterType",
+    "Board",
+    "BoardOutcome",
+    "Director",
+    "DirectorPersona",
     "Installer",
     "Manufacturer",
     "Region",

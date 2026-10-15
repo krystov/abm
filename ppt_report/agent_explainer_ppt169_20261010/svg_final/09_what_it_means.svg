@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Segoe UI, Arial, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#2B5CE6" />
+    <text x="72" y="96" font-size="20" fill="#101828" fill-opacity="0.78">WHAT IT MEANS</text>
+    <text x="72" y="142" font-family="Georgia, Cambria, Times New Roman, serif" font-size="48" font-weight="700" fill="#101828">A better model of people</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#101828" stroke-opacity="0.22" stroke-width="1" />
+  </g>
+
+  <g id="buys" data-pptx-bounds="72 200 560 400">
+    <text x="72" y="246" font-size="28" font-weight="700" fill="#2B5CE6">What it buys</text>
+    <text font-size="20" fill="#2A2F3A" x="72" y="300">reasons a formula cannot hold:</text><text font-size="20" fill="#2A2F3A" x="72" y="326">peers, emotion, expectations</text><text font-size="20" fill="#2A2F3A" x="72" y="380">disagreement inside the firm, with</text><text font-size="20" fill="#2A2F3A" x="72" y="406">minutes you can actually read</text><text font-size="20" fill="#2A2F3A" x="72" y="460">a clean seam — the decision changes,</text><text font-size="20" fill="#2A2F3A" x="72" y="486">the accounting does not</text></g>
+
+  <g id="does-not" data-pptx-bounds="664 200 544 400">
+    <text x="664" y="246" font-size="28" font-weight="700" fill="#E4572E">What it does not</text>
+    <text font-size="20" fill="#2A2F3A" x="664" y="300">the full 26-year AI run is not</text><text font-size="20" fill="#2A2F3A" x="664" y="326">finished, so no accuracy claim</text><text font-size="20" fill="#2A2F3A" x="664" y="380">LLM decisions are not reproducible</text><text font-size="20" fill="#2A2F3A" x="664" y="406">run to run, and they cost money</text><text font-size="20" fill="#2A2F3A" x="664" y="460">a more realistic story is not</text><text font-size="20" fill="#2A2F3A" x="664" y="486">automatically a truer number</text></g>
+
+  <g id="close-line" data-pptx-bounds="72 616 1136 40">
+    <text x="72" y="642" font-size="20" fill="#101828">Every AI decision is schema-checked and falls back to the equation on failure.</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#101828" stroke-opacity="0.30" stroke-width="1" />
+    <text x="72" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75">The point is behavioural realism, not prediction accuracy</text>
+    <text x="1208" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75" text-anchor="end">09 / 10</text>
+  </g>
+
+</svg>

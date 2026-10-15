@@ -10,11 +10,13 @@ import asyncio
 import os
 import sys
 import time
+from pathlib import Path
 
 from dotenv import load_dotenv
 
 from agents.agent_framework import get_llm_model
 from analysis.metrics import compute_metrics, plot_results, print_summary
+from config import model as model_cfg
 from model.solar_model import SolarModel
 
 # Ensure UTF-8 output on Windows consoles
@@ -34,8 +36,21 @@ async def main():
     # Set use_llm=False for fast formula-only mode; use_llm=True needs a key
     # (DEEPSEEK_API_KEY or OPENAI_API_KEY).
     has_key = bool(os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("OPENAI_API_KEY"))
-    use_llm = "--llm" in sys.argv and has_key
+    use_llm = ("--llm" in sys.argv or "--board" in sys.argv) and has_key
     use_real_data = "--real-data" in sys.argv
+
+    # Board-of-directors mode: every manufacturer decides by majority vote of
+    # its AI directors (agents/board.py) instead of one single LLM call.
+    use_board = use_llm and model_cfg.use_board and "--no-board" not in sys.argv
+    if "--board" in sys.argv:
+        use_board = use_llm
+    board_log_path = None
+    if use_board:
+        stamp = time.strftime("%Y%m%d_%H%M%S")
+        board_log_path = str(
+            Path(model_cfg.board_log_dir) / f"board_minutes_{stamp}.md"
+        )
+
     model = SolarModel(
         n_ticks=312,
         n_adopters=500,
@@ -43,6 +58,11 @@ async def main():
         seed=42,
         llm_adopter_fraction=0.05,  # 5% of undecided adopters use LLM each tick
         use_llm=use_llm,
+        use_board=use_board,
+        board_size=model_cfg.board_size,
+        board_temperature=model_cfg.board_temperature,
+        board_verbose=model_cfg.board_verbose,
+        board_log_path=board_log_path,
         use_real_data=use_real_data,
     )
 
@@ -52,6 +72,20 @@ async def main():
     print(f"  Ticks             : {model.n_ticks}  months  (1991–2016)")
     print(f"  Data source       : {'historical' if use_real_data else 'synthetic'}")
     print(f"  LLM mode          : {'ON  (' + model.llm_model + ')' if use_llm else 'OFF (formula-only)'}")
+    if use_board:
+        quorum = model.board_size // 2 + 1
+        print(
+            f"  Decision mode     : 董事会群决策"
+            f"（{model.board_size} 名董事，过半 {quorum} 票通过）"
+        )
+        print(
+            f"  Board calls/tick  : ~{model.board_size * len(model.manufacturers)}"
+            f" 次厂商董事投票 × {model.n_ticks} tick"
+        )
+        if board_log_path:
+            print(f"  Board minutes     : {board_log_path}")
+    elif use_llm:
+        print("  Decision mode     : 单 LLM 决策（关闭董事会：--no-board）")
     if os.environ.get("DEEPSEEK_API_KEY"):
         print(f"  LLM provider      : DeepSeek (base_url={os.environ.get('DEEPSEEK_BASE_URL', 'https://api.deepseek.com')})")
     else:
@@ -67,6 +101,9 @@ async def main():
 
     metrics = compute_metrics(history)
     print_summary(metrics)
+
+    if board_log_path:
+        print(f"  董事会纪要（全部会议）: {board_log_path}")
 
     # Save plots
     try:

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"
+     data-pptx-page-role="cover"
+     font-family="Segoe UI, Arial, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background"
+        x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+
+  <g id="cover-heading" data-pptx-bounds="72 110 720 420">
+    <rect id="motif-bar" x="72" y="118" width="56" height="4" fill="#2B5CE6"/>
+    <text x="72" y="168" font-size="20" fill="#101828" fill-opacity="0.78">SCIENCE EXPLAINER · 5 MINUTES</text>
+    <text x="72" y="296" font-family="Georgia, Cambria, Times New Roman, serif" font-size="72" font-weight="700" fill="#101828">Agents, then AI</text>
+    <text x="72" y="370" font-size="36" fill="#2A2F3A"><tspan x="72" dy="0">What happens when you hand the</tspan><tspan x="72" dy="46">decision step of a social-science</tspan><tspan x="72" dy="46">simulation to a large language</tspan><tspan x="72" dy="46">model</tspan></text>
+  </g>
+
+  <g id="cover-figures" data-pptx-bounds="840 110 368 470">
+    <text x="840" y="212" font-family="Consolas, Segoe UI, monospace" font-size="72" font-weight="700" fill="#2B5CE6">500</text>
+    <text x="840" y="246" font-size="20" fill="#2A2F3A"><tspan x="840" dy="0">agents in the model, scaled</tspan><tspan x="840" dy="26">1:1000 from 20.8 M buyers</tspan></text>
+    <line x1="840" y1="286" x2="1208" y2="286" stroke="#101828" stroke-opacity="0.22" stroke-width="1"/>
+    <text x="840" y="368" font-family="Consolas, Segoe UI, monospace" font-size="72" font-weight="700" fill="#101828">312</text>
+    <text x="840" y="402" font-size="20" fill="#2A2F3A">monthly steps, 1991 to 2016</text>
+    <line x1="840" y1="442" x2="1208" y2="442" stroke="#101828" stroke-opacity="0.22" stroke-width="1"/>
+    <text x="840" y="524" font-family="Consolas, Segoe UI, monospace" font-size="72" font-weight="700" fill="#2B5CE6">2</text>
+    <text x="840" y="558" font-size="20" fill="#2A2F3A">agent types use an LLM</text>
+  </g>
+
+  <g id="cover-footer" data-pptx-bounds="72 616 1136 64">
+    <line x1="72" y1="624" x2="1208" y2="624" stroke="#101828" stroke-opacity="0.30" stroke-width="1"/>
+    <text x="72" y="662" font-size="18" fill="#2A2F3A" fill-opacity="0.75">Case: agent-based model of Germany's solar PV policy mix, 1991–2016</text>
+    <text x="1208" y="662" font-size="18" fill="#2A2F3A" fill-opacity="0.75" text-anchor="end">01 / 10</text>
+  </g>
+
+</svg>

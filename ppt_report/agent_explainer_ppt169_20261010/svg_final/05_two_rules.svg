@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content" font-family="Segoe UI, Arial, sans-serif">
+
+  <rect id="page-bg" data-pptx-role="background" x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+
+  <g id="page-header" data-pptx-bounds="72 48 1136 132">
+    <rect id="motif-bar" x="72" y="58" width="56" height="4" fill="#2B5CE6" />
+    <text x="72" y="96" font-size="20" fill="#101828" fill-opacity="0.78">THE RULES · 1 OF 2</text>
+    <text x="72" y="142" font-family="Georgia, Cambria, Times New Roman, serif" font-size="48" font-weight="700" fill="#101828">Two rules, written down</text>
+    <line x1="72" y1="168" x2="1208" y2="168" stroke="#101828" stroke-opacity="0.22" stroke-width="1" />
+  </g>
+
+  <g id="rule-one" data-pptx-bounds="72 200 1136 190">
+    
+  <g transform="translate(72, 202) scale(1.16667)" fill="none" stroke="#E4572E" stroke-width="2">
+    <path d="M7 20l10 0" />
+    <path d="M6 6l6 -1l6 1" />
+    <path d="M12 3l0 17" />
+    <path d="M9 12l-3 -6l-3 6a3 3 0 0 0 6 0" />
+    <path d="M21 12l-3 -6l-3 6a3 3 0 0 0 6 0" />
+  </g>
+    <text x="116" y="226" font-size="20" font-weight="700" fill="#E4572E">RULE 1 · THE ADOPTION DECISION</text>
+    <text font-size="28" fill="#2A2F3A" x="72" y="290">First the agent must get the idea — peers, information, awareness,</text><text font-size="28" fill="#2A2F3A" x="72" y="330">return. Then it must pass an economic test: the net present value</text><text font-size="28" fill="#2A2F3A" x="72" y="370">has to be non-negative, unless it is a hard-core environmentalist.</text></g>
+
+  <g id="rule-two" data-pptx-bounds="72 400 1136 190">
+    
+  <g transform="translate(72, 402) scale(1.16667)" fill="none" stroke="#E4572E" stroke-width="2">
+    <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11" />
+  </g>
+    <text x="116" y="426" font-size="20" font-weight="700" fill="#E4572E">RULE 2 · THE COST OF A MODULE</text>
+    <text font-size="28" fill="#2A2F3A" x="72" y="490">Cost falls with cumulative production, learning by doing, and with</text><text font-size="28" fill="#2A2F3A" x="72" y="530">the knowledge built up by R&amp;D, learning by research. The same</text><text font-size="28" fill="#2A2F3A" x="72" y="570">equation applies to every manufacturer in every month.</text></g>
+
+  <g id="rule-close" data-pptx-bounds="72 606 1136 42">
+    <text x="72" y="636" font-size="20" fill="#101828">The consumer is a pure optimiser, and no manufacturer ever has to be persuaded to invest in R&amp;D.</text>
+  </g>
+
+  <g id="page-footer" data-pptx-bounds="72 648 1136 60">
+    <line x1="72" y1="660" x2="1208" y2="660" stroke="#101828" stroke-opacity="0.30" stroke-width="1" />
+    <text x="72" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75">Both rules are calibrated to the published supplementary information of the original study</text>
+    <text x="1208" y="690" font-size="18" fill="#2A2F3A" fill-opacity="0.75" text-anchor="end">05 / 10</text>
+  </g>
+
+</svg>
